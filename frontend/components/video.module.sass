@@ -1,0 +1,57 @@
+$width: 550px
+	
+.videoContainer
+	text-align: center
+	
+.video
+	background-image: url(/images/preview.jpg)
+	background-position: center 
+	background-size: cover
+	width: $width
+	height: $width*9/16
+	display: flex
+	align-items: center
+	justify-content: center
+	position: relative
+
+	.title
+		color: var(--orange)
+		font-weight: 300
+		font-size: 3.8em
+		text-transform: uppercase
+		margin: 0
+		margin-top: 45px
+		white-space: pre-wrap
+
+	.time
+		position: absolute
+		width: 100%
+		bottom: 18px
+		text-align: center
+		font-weight: 500
+		color: white
+
+.description
+	font-weight: 500
+	color: white
+	white-space: pre-wrap
+	line-height: 1.6em
+	margin-top: 0.5em
+
+$widthSmall: 380px
+.video.small
+	width: $widthSmall
+	height: $widthSmall*9/16
+
+	.title
+		font-size: 1.9em
+
+	.time
+		font-size: 0.7em
+		font-weight: 400
+
+.smallTitle
+	.title
+		font-size: 2.8em
+
+
