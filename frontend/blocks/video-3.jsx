@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { Parallax } from 'components/parallax'
 
-import styles from './video.module.sass'
+import styles from './styles/video.module.sass'
 import Video from 'components/video'
 
 const videos = [

@@ -21,7 +21,7 @@ export function ParallaxProvider ({children}){
 
 		const loopParallax = () => {
 			if(Math.abs(window.pageYOffset-lastScroll) > 1){
-				lastScroll = lastScroll+(window.pageYOffset-lastScroll)*0.5
+				lastScroll = lastScroll+(window.pageYOffset-lastScroll)*0.4
 				setValue(lastScroll)
 			}
 			if(!stop)

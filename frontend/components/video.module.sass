@@ -1,3 +1,4 @@
+@import "styles/variables"
 $width: 550px
 	
 .videoContainer
@@ -15,7 +16,7 @@ $width: 550px
 	position: relative
 
 	.title
-		color: var(--orange)
+		color: $orange
 		font-weight: 300
 		font-size: 3.8em
 		text-transform: uppercase
@@ -25,7 +26,8 @@ $width: 550px
 
 	.time
 		position: absolute
-		width: 100%
+		left: 0
+		right: 0
 		bottom: 18px
 		text-align: center
 		font-weight: 500

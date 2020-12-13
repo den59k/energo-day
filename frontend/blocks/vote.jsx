@@ -1,6 +1,6 @@
 import cn from 'classnames'
 
-import styles from './vote.module.sass'
+import styles from './styles/vote.module.sass'
 import videoStyles from 'components/video.module.sass'
 
 import Video from 'components/video'
@@ -33,7 +33,7 @@ export default function Vote(){
 					<li key={index}>
 						<Video title={item.title} className={videoStyles.small} time={time}/>
 						<div className={styles.description}>Описание ролика</div>
-						<button><img src="/images/like.svg"/>Проголосовать</button>
+						<button className="button"><img src="/images/like.svg"/>Проголосовать</button>
 					</li>
 				))}			
 			</ul>

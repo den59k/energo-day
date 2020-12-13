@@ -1,0 +1,79 @@
+@import "styles/variables"
+	
+.container
+	background-image: url(/images/salut-2.jpg)
+	background-size: cover
+	background-position: center
+
+.container2
+	justify-content: space-between
+	
+.videoContainer
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	flex: 1 1 auto
+	align-items: center
+	padding: 80px 0
+	@media(max-height: 850px)
+		padding: 0
+
+.video
+	width: 210px
+	height: 140px
+	margin-bottom: 20px
+	border: 10px solid white
+	background-size: cover
+	background-position: center
+	background-color: $primary
+
+	img
+		height: 70%
+		opacity: 0.3
+		transition: opacity 0.2s
+	&:hover
+		cursor: default
+
+	&.active:hover
+		cursor: pointer
+		img
+			opacity: 1
+
+.button
+	text-align: center
+	padding-bottom: 7vh
+
+	button
+		padding: 0 90px
+		font-size: 1em
+
+.photoContainer
+	flex: 0 0 auto
+	margin: 0 auto
+	display: flex
+
+.photos
+	flex: 1 1 auto
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	
+.photo
+	width: 120px
+	height: 120px
+	border: none
+	outline: none
+	background-position: center
+	background-size: cover
+
+.bigImage
+	flex: 0 0 auto
+	height: 400px
+	width: 400px
+	background-size: cover
+	margin: 0 15px
+
+
+
+
+	

@@ -1,0 +1,71 @@
+@import "styles/variables"
+	
+.container
+	background-image: url(/images/pattern-2.svg)
+	background-size: cover
+	background-position: center
+	background-color: #E0E0E0
+	
+.game
+	display: flex
+	justify-content: center
+	flex-direction: column
+	align-items: center
+	color: $primary
+
+.hideRight, .hideLeft
+	position: absolute
+	top: 0
+	width: 100%
+	pointer-events: none
+	opacity: 0
+	z-index: 1
+
+.hideRight
+	transform: translateX(-500px)
+
+.hideLeft
+	transform: translateX(500px)
+
+.gameContainer
+	margin: auto auto
+	flex: 0 0 auto
+	position: relative
+
+	&>div
+		transition: 0.5s
+		height: 600px
+
+	h3
+		color: $primary
+		margin-bottom: 0.5em
+
+	button
+		font-size: 1em
+
+	.sub
+		text-align: center
+		color: $primary
+		margin-bottom: 2em
+
+.leftArrow, .rightArrow
+	background: none
+	border: none
+	position: absolute
+	top: 50%
+	margin-top: -20px
+	transition: 0.3s
+	img
+		width: 30px
+
+	&.hide
+		opacity: 0
+		transform: scale(0.7)
+
+.leftArrow
+	left: 0
+	img 
+		transform: rotate(180deg)
+
+.rightArrow
+	right: 0
