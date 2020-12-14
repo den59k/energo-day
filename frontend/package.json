@@ -10,6 +10,7 @@
   "dependencies": {
     "ajv": "^6.12.6",
     "classnames": "^2.2.6",
+    "etag": "^1.8.1",
     "fluent-ffmpeg": "^2.1.2",
     "lodash": "^4.17.20",
     "mime": "^2.4.6",

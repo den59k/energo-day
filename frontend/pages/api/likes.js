@@ -1,5 +1,7 @@
 import getDB from 'libs/db'
 import validate from 'libs/validate'
+import { nanoid } from 'nanoid'
+import etag from 'etag'
 
 const properties = {
 	index: { type: "integer" }
@@ -8,15 +10,21 @@ const properties = {
 const schema = { properties, required: ["index"] }
 
 export default async (req, res) => {
-	const ip = req.headers['x-real-ip'] || req.connection.remoteAddress
+
 	const db = await getDB('likes')
 	const voteDB = await getDB('votes')
 
+	const token = req.cookies.token
+
+	if(!token){
+		let token = nanoid(30)
+		res.setHeader("Set-Cookie", `token=${token};max-age=31536000; path=/;`)
+	}
 	try{
 		if(req.method === 'POST'){
 			if(!validate(req, res, schema)) return
 
-			await db.insertOne({ip, index: req.body.index})
+			await db.insertOne({ip: token, index: req.body.index})
 			await voteDB.updateOne({index: req.body.index}, { $inc: { likes: 1 }})
 			res.json({count: 1})
 		}
@@ -24,7 +32,7 @@ export default async (req, res) => {
 		if(req.method === 'DELETE'){
 			if(!validate(req, res, schema)) return
 
-			const resp = await db.deleteOne({ip, index: req.body.index})
+			const resp = await db.deleteOne({ip: token, index: req.body.index})
 			await voteDB.updateOne({index: req.body.index}, { $inc: { likes: -1 }})
 
 			res.json({count: resp.deletedCount})

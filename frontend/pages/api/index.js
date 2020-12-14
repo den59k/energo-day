@@ -4,7 +4,8 @@ export default async (req, res) => {
 
 	if(req.method === 'GET'){
 		const db = await getDB()
-		const ip = req.headers['x-real-ip'] || req.connection.remoteAddress
+		
+		const token = req.cookies.token
 
 		const options = { projection: {_id: 0} }
 
@@ -12,8 +13,13 @@ export default async (req, res) => {
 		const videos = await db.collection('videos').find({accepted: true}, options).toArray()
 		const messages = await db.collection('chat').find({accepted: true}, options).toArray()
 
-		const likes = await db.collection('votes').find({}, {projection: { _id: 0}}).toArray()
-		const indexes = await db.collection('likes').find({ip}, { projection: { _id: 0, ip: 0 }}).toArray()
+		const likes = await db.collection('votes').find({}, {...options, sort: { index: 1 }}).toArray()
+
+		let indexes
+		if(token)
+			indexes = await db.collection('likes').find({ip: token}, { projection: { _id: 0, ip: 0 }}).toArray()
+		else
+			indexes = []
 
 		res.json({photos, videos, messages, likes, indexes})
 	}

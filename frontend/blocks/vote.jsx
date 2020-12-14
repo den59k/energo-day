@@ -35,7 +35,7 @@ const clips = [
 	},
 	{ 
 		title: "Кунгурское отделение", 
-		description: "«Пермэнергосбыт» представляет!\nВ 2020 году они трудились как пчелы!\nСловно мед собирали оплату с населения\nв общую копилку компании.\nОбеспечивали светом и теплом свой город!\nИ сейчас они заслужили возможность\nпоздравить всех праздником.\nВстречайте: Самые трудолюбивые и\nэнергичные пчелы Кунгура,\nв новом блокбастере «Энерготоки»!",
+		description: "«Пермэнергосбыт» представляет!\nВ 2020 году они трудились как пчелы!\nСловно мед собирали оплату с населения\nв общую копилку компании.\nОбеспечивали светом и теплом свой город!\nИ сейчас они заслужили возможность\nпоздравить всех с праздником.\nВстречайте: Самые трудолюбивые и\nэнергичные пчелы Кунгура,\nв новом блокбастере «Энерготоки»!",
 		id: "uEaouwm3ebA" 
 	},
 	{ 
@@ -45,7 +45,7 @@ const clips = [
 	},
 	{ 
 		title: "Очерское отделение", 
-		description: "Наш видеоролик о буднях Очерского Отделения:\nутро начинается с замера температуры,\nобед - за ЗОЖ, все оперативки\nо выполнении планов и прибыли,\nа мечты работников о крупной премии.",
+		description: "Наш видеоролик о буднях\nОчерского Отделения:\nутро начинается с замера температуры,\nобед - за ЗОЖ, все оперативки\nо выполнении планов и прибыли,\nа мечты работников о крупной премии.",
 		id: "uEaouwm3ebA" 
 	},
 	{ 
@@ -78,13 +78,13 @@ const clips = [
 const time = "Голосование продлится с 12.00 до 16.00"
 
 export default function Vote({likes, indexes}){
-	
-	const _indexes = indexes.map(item => item.index)
 
 	const onLike = async (index) => {
-		const resp = await REST ('/api/likes', {index}, _indexes.includes(index)?'DELETE': 'POST')
+		const resp = await REST ('/api/likes', {index}, indexes.find(item => item.index===index)?'DELETE': 'POST')
 		if(!resp.error) mutate('/api')
 	}
+
+	console.log(indexes)
 
 	return (
 		<div className={styles.background} id="vote">
@@ -94,7 +94,7 @@ export default function Vote({likes, indexes}){
 					<li key={index}>
 						<Video title={item.title} className={videoStyles.small} time={time} id={item.id}/>
 						<div className={styles.description}>{item.description}</div>
-						{_indexes.includes(index)?(
+						{indexes.find(item => item.index===index)?(
 							<button className={cn("button", styles.button)} onClick={() => onLike(index)}>
 								{likes?likes[index].likes: 0}<img src="/images/liked.svg"/>Вы прогосовали
 							</button>
