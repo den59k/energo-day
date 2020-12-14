@@ -96,7 +96,7 @@ export default function Vote({likes, indexes}){
 						<div className={styles.description}>{item.description}</div>
 						{indexes.find(item => item.index===index)?(
 							<button className={cn("button", styles.button)} onClick={() => onLike(index)}>
-								{likes?likes[index].likes: 0}<img src="/images/liked.svg"/>Вы прогосовали
+								{likes?likes[index].likes: 0}<img src="/images/liked.svg"/>Вы проголосовали
 							</button>
 						):(
 							<button className={cn("button", styles.button)} onClick={() => onLike(index)}>

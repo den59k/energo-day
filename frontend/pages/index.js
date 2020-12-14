@@ -19,8 +19,6 @@ export default function Home() {
   const { data } = useSWR('/api', GET, { refreshInterval: 5000 })
   const _data = data || { photos: [], videos: [], messages: [], indexes: [] }
 
-  console.log(_data)
-
   return (
     <Layout >
      <HeadBlock/>

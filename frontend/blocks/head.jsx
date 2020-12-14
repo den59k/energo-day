@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Video from 'components/video'
-
+import onClick from 'libs/smooth-href'
 import styles from './styles/head.module.sass'
 
 const links = [
@@ -9,7 +9,7 @@ const links = [
 	{ title: "Наши победители", href: "/#video-4" },
 	{ title: "Голосование за видеоролики", href: "/#vote" },
 	{ title: "Розыгрыш супер-приза", href: "/#video-3", className: styles.big },
-	{ title: "Игротека", href: "/#congrulations" },
+	{ title: "Игротека", href: "/#games" },
 	{ title: "Видеопоздравления", href: "/#greetings" },
 	{ title: "Поздравить в чате", href: "/#chat" },
 	{ title: "Праздничное фото", href: "/#make-photo" },
@@ -19,6 +19,7 @@ const videoInfo = {
 	time: "Праздничная трансляция начнется в 10:00",
 	id: "HOz34_2Z-mw" 
 }
+
 
 export default function HeadBlock(){
 
@@ -37,7 +38,7 @@ export default function HeadBlock(){
 				<div className={styles.buttons}>
 					{links.map((item, index) => (
 						<Link href={item.href} key={index}>
-							<a className={item.className}>{item.title}</a>
+							<a className={item.className} onClick={onClick}>{item.title}</a>
 						</Link>
 					))}
 				</div>

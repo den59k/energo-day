@@ -25,6 +25,10 @@
 	min-width: 600px
 	overflow: hidden
 
+	@media(max-width: 800px)
+		min-width: 200px
+		margin: 8px
+
 
 @keyframes openBlack
 	from
@@ -47,6 +51,10 @@
 		width: 1000px
 		height: 1000px * 9 / 16
 
+	@media(max-width: 700px)
+		width: 97vw
+		height: 97vw * 9 / 16
+
 .video
 	position: relative
 	overflow: visible
@@ -55,11 +63,14 @@
 		max-width: 1000px
 		max-height: 700px
 
-		@media(max-width: 1000px/0.8)
+		@media(max-width: 1200px)
 			max-width: 80vw
 
-		@media(max-height: 700px/0.8)
-			max-height: 80vh
+		@media(max-width: 670px)
+			max-width: 96vw
+
+		@media(max-height: 800px)
+			max-height: 70vh
 
 	.buttons
 		display: flex
@@ -107,6 +118,10 @@
 	@media(min-height: 800px)
 		width: 800px * 0.6
 		height: 800px * 0.6
+
+	@media (max-aspect-ratio: 5/7)
+		width:95vw
+		height: 95vw
 
 	.label
 		display: flex
@@ -173,6 +188,9 @@
 		img
 			max-height: 70px
 			max-width: 80px
+			@media(max-width: 800px)
+				max-height: 50px
+				max-width: 50px
 
 .actionButton
 	position: absolute

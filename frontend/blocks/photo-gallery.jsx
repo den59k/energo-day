@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import cn from 'classnames'
 import { Parallax } from 'components/parallax'
 import useSWR, { mutate } from 'swr'
@@ -29,6 +29,7 @@ function getPhotos(photos, start, end, onPhotoClick){
 export default function PhotoGallery ({photos}){	
 
 	const [ currentPhoto, setCurrentPhoto ] = useState(0)
+	const [ count, setCount ] = useState()
 
 	const onMakePhoto = () => {
 		openMakePhotoModal(async (buffer) => {
@@ -37,7 +38,28 @@ export default function PhotoGallery ({photos}){
 			mutate('/api')
 			closeModal()
 		})
-	}
+	}	
+
+	useEffect(() => {
+		const resize = () => {
+			if(document.documentElement.clientWidth > 1200)
+				return setCount(9)
+			if(document.documentElement.clientWidth > 950)
+				return setCount(6)
+
+			if(document.documentElement.clientWidth > 770)
+				return setCount(9)
+
+			if(document.documentElement.clientWidth > 450)
+				return setCount(8)
+
+			return setCount(10)
+		}
+
+		resize()
+		window.addEventListener('resize', resize)
+		return () => window.removeEventListener('resize', resize)
+	}, [])
 
 	const onPhotoClick = (index) => {
 		setCurrentPhoto(index)
@@ -48,14 +70,14 @@ export default function PhotoGallery ({photos}){
 			
 			<h2>Праздничная фотогалерея</h2>
 			<div className={cn(styles.photoContainer, "container")}>
-				<div className={styles.photos}>{getPhotos(photos, 0, 9, onPhotoClick)}</div>
+				<div className={styles.photos}>{getPhotos(photos, 0, count, onPhotoClick)}</div>
 
 				<div 
 					className={styles.bigImage} 
 					style={{backgroundImage: `url(${photos[currentPhoto]?photos[currentPhoto].src: '/images/avers.svg'})`}}
 				></div>
 
-				<div className={styles.photos}>{getPhotos(photos, 9, 18, onPhotoClick)}</div>
+				<div className={styles.photos}>{getPhotos(photos, count, count*2, onPhotoClick)}</div>
 			</div>
 			<div className={styles.button}>
 				<button className="button" onClick={onMakePhoto}>Сделать праздничное фото</button>

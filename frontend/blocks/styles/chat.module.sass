@@ -2,6 +2,7 @@
 
 .container
 	color: white
+	height: 100vh
 	
 	h3
 		margin: 0.6em 0
@@ -13,6 +14,9 @@
 	width: 60px
 	padding: 5px 0
 	margin-top: 1.7em
+
+	@media(max-width: 700px)
+		margin-top: 10px
 
 .avatarButton
 	height: 60px
@@ -38,12 +42,19 @@
 		border-radius: 7px
 		overflow-y: auto
 
+		@media(max-width: 940px)
+			width: 97vw
+
 .chatInner
 	color: black
 
 .message
 	display: flex
 	margin: 40px 25px
+
+	@media(max-width: 600px)
+		margin: 10px 5px
+
 	.avatar
 		height: 68px
 		flex: 0 0 68px 
@@ -52,6 +63,10 @@
 		margin-right: 10px
 		background-position: center
 		background-size: cover
+		
+		@media(max-width: 600px)
+			height: 50px
+			flex: 0 0 50px
 
 	.content
 		flex: 1 1 auto
@@ -71,6 +86,9 @@
 	.time
 		margin-left: auto
 
+		@media(max-width: 450px)
+			display: none
+
 	.text
 		background-color: #E0E0E0
 		border-radius: 0 30px 0 0
@@ -79,13 +97,26 @@
 		margin-top: 5px
 		white-space: pre-wrap
 
+		@media(max-width: 600px)
+			padding-left: 7px
+
 .inputs
 	display: flex
 	margin-bottom: 25px
 
+	@media(max-width: 700px)
+		flex-direction: column
+		padding: 0 10px
+
 .buttons
 	display: flex
 	flex-direction: column
+
+	@media(max-width: 700px)
+		flex-direction: row
+		align-self: stretch
+		justify-content: space-between
+		padding: 0 40px
 
 	.send
 		margin-top: auto
@@ -117,6 +148,13 @@
 		outline: none
 		min-width: 250px
 
+	
+	@media(max-width: 700px)
+		margin: 0
+		input, textarea
+			width: 100%
+			min-width: 0
+
 	input
 		line-height: 2.2em
 		height: 2.2em
@@ -130,6 +168,15 @@
 	flex-direction: column 
 	margin: 0 40px
 	flex: 1 1 auto
+
+	@media(max-width: 850px)
+		margin: 0 10px
+
+	@media(max-width: 700px)
+		align-self: stretch
+		height: 80px
+		margin: 0
+		margin-top: 5px
 
 	textarea
 		flex: 1 1 auto

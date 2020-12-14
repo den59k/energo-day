@@ -1,13 +1,30 @@
 import cn from 'classnames'
-
-import styles from './styles/video-greetings.module.sass'
 import { openRecordModal, openVideoModal, closeModal } from 'components/modal-window'
 import { mutate } from 'swr'
+import { useEffect, useState } from 'react'
+
+import styles from './styles/video-greetings.module.sass'
+
 
 export default function VideoGreetingsBlock ({videos}){
 	
+	const [ count, setCount ] = useState(15)
 	const newVideos = [ ...videos]
-	for(let i = 0; i < 15-videos.length; i++)
+
+	useEffect(() => {
+		const resize = () => {
+			if(document.documentElement.clientWidth < 550)
+				setCount(8)
+			else
+				setCount(15)
+		}
+
+		resize()
+		window.addEventListener('resize', resize)
+		return () => window.removeEventListener('resize', resize)
+	}, [])
+
+	for(let i = 0; i < count-videos.length; i++)
 		newVideos.push({})
 
 	const onClickRecord = () => {

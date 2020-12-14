@@ -2,7 +2,7 @@ import cn from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { modal } from './index'
 
-import { getCanvasBlob, redraw, video2canvas, getStyleButton, findSticker, addPointerEvent, calcZoom, calcAngle } from './canvas-tools'
+import { calcPos, getCanvasBlob, redraw, video2canvas, getStyleButton, findSticker, addPointerEvent, calcZoom, calcAngle } from './canvas-tools'
 import styles from './modal.module.sass'
 
 const stickers = [];
@@ -68,20 +68,9 @@ function MakePhotoModal ({onSubmit}){
 		setStickerState([...stickerState, sticker])
 	}
 
-	//Вспомогательная функция, чтобы высчитать координаты мыши в процентах
-	const calcPos = (e) => {
-		if(e.touches) 	e = e.touches[0];
-
-		const rect = canvasRef.current.getBoundingClientRect();
-		const x = (e.clientX - rect.x)/rect.width;
-		const y = (e.clientY - rect.y)/rect.height;
-
-		return {x, y};
-	}
-
 	//Если мы нажали на канвас - ищем подходящий стикер
 	const onPointerCanvasDown = (e) => {
-		const pos = calcPos(e)
+		const pos = calcPos(e, canvasRef.current)
 		e.preventDefault()
 
 		const stickerIndex = findSticker(stickerState, pos)
@@ -90,43 +79,43 @@ function MakePhotoModal ({onSubmit}){
 		
 		const startStickerPos = stickerState[stickerIndex]
 		addPointerEvent(e => {
-			const newPos = calcPos(e)
+			const newPos = calcPos(e, canvasRef.current)
 			setStickerState(stickerState.map((item, index) => (index !== stickerIndex)? item: {
 				...item,
 				x: startStickerPos.x + newPos.x - pos.x,
 				y: startStickerPos.y + newPos.y - pos.y
 			}))
-		})
+		}, !!e.touches)
 	}
 
 	const rotateSticker = (e) => {
 		e.preventDefault()
-		const pos = calcPos(e)
+		const pos = calcPos(e, canvasRef.current)
 		const startStickerPos = stickerState[targetSticker]
 		addPointerEvent((e) => {
-			const newPos = calcPos(e)
+			const newPos = calcPos(e, canvasRef.current)
 			const angle = calcAngle(startStickerPos, pos, newPos)
 
 			setStickerState(stickerState.map((item, index) => (index !== targetSticker)? item: {
 				...item,
 				angle: startStickerPos.angle + angle
 			}))
-		})
+		}, !!e.touches)
 	}
 
 	const scaleSticker = (e) => {
 		e.preventDefault()
-		const pos = calcPos(e)
+		const pos = calcPos(e, canvasRef.current)
 		const startStickerPos = stickerState[targetSticker]
 		addPointerEvent((e) => {
-			const newPos = calcPos(e)
+			const newPos = calcPos(e, canvasRef.current)
 			const zoom = calcZoom(startStickerPos, pos, newPos)
 
 			setStickerState(stickerState.map((item, index) => (index !== targetSticker)? item: {
 				...item,
 				zoom
 			}))
-		})
+		}, !!e.touches)
 	}
 
 	const deleteSticker = () => {
@@ -147,17 +136,17 @@ function MakePhotoModal ({onSubmit}){
 			{mode === 'permission' && <div className={styles.label}>Дайте разрешение на использование камеры</div>}
 			<video muted={true} ref={videoRef} style={mode === 'accepted'?{}: {display: 'none'}}/>
 
-			<canvas ref={canvasRef} style={mode === 'stickers'?{}: {display: 'none'}} onPointerDown={onPointerCanvasDown}/>
+			<canvas ref={canvasRef} style={mode === 'stickers'?{}: {display: 'none'}} onMouseDown={onPointerCanvasDown} onTouchStart={onPointerCanvasDown}/>
 
 			{targetSticker >= 0 && targetSticker < stickerState.length && (
 				<>
 					<button onClick={deleteSticker} className={cn(styles.actionButton, styles.red)} style={getStyleButton(stickerState[targetSticker], -1, -1)}>
 						<img src="/images/icons/delete.svg" alt="Удалить стикер" title="Удалить стикер"/>
 					</button>
-					<button onPointerDown={scaleSticker} className={styles.actionButton} style={getStyleButton(stickerState[targetSticker], 1, -1)}>
+					<button onTouchStart={scaleSticker} onMouseDown={scaleSticker} className={styles.actionButton} style={getStyleButton(stickerState[targetSticker], 1, -1)}>
 						<img src="/images/icons/scale.svg" alt="Увеличить стикер" title="Увеличить стикер"/>
 					</button>
-					<button onPointerDown={rotateSticker} className={styles.actionButton} style={getStyleButton(stickerState[targetSticker], 1, 1)}>
+					<button onTouchStart={rotateSticker} onMouseDown={rotateSticker} className={styles.actionButton} style={getStyleButton(stickerState[targetSticker], 1, 1)}>
 						<img src="/images/icons/rotate.svg" alt="Вращать стикер" title="Вращать стикер"/>
 					</button>
 				</>

@@ -9,6 +9,9 @@
 		padding: 0 90px
 		font-size: 1em
 
+		@media(max-width: 420px)
+			padding: 0 20px
+
 .photoContainer
 	flex: 0 0 auto
 	margin: 0 auto
@@ -19,7 +22,15 @@
 	display: flex
 	flex-wrap: wrap
 	justify-content: space-between
+
+	@media(max-width: 950px)
+		margin: 0 5px
 	
+	@media(max-width: 760px)
+		justify-content: center
+		margin: 0
+
+
 .photo
 	width: 120px
 	height: 120px
@@ -28,11 +39,18 @@
 	background-position: center
 	background-size: cover
 
+	@media(max-width: 510px)
+		width: 23vw
+		height: 23vw	
+
 .bigImage
 	flex: 0 0 auto
 	height: 400px
 	width: 400px
 	background-size: cover
 	margin: 0 15px
+
+	@media(max-width: 950px)
+		display: none
 
 

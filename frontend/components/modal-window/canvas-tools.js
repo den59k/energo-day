@@ -1,4 +1,15 @@
 
+	//Вспомогательная функция, чтобы высчитать координаты мыши в процентах
+export const calcPos = (e, canvas) => {
+	if(e.touches) 	e = e.touches[0];
+
+	const rect = canvas.getBoundingClientRect();
+	const x = (e.clientX - rect.x)/rect.width;
+	const y = (e.clientY - rect.y)/rect.height;
+
+	return {x, y};
+}
+
 //Функция для вычисления угла
 export function calcAngle (stickerPos, oldPos, newPos){
 	const oldVec = { x: oldPos.x - stickerPos.x, y: oldPos.y - stickerPos.y	}
@@ -33,9 +44,14 @@ export function calcZoom (stickerPos, oldPos, newPos){
 }
 
 //Функция добавление событий перемещения
-export function addPointerEvent (event) {
-	document.addEventListener('pointermove', event)
-	document.addEventListener('pointerup', () => document.removeEventListener('pointermove', event), { once: true })
+export function addPointerEvent (event, touch=false) {
+	if(touch){
+		document.addEventListener('touchmove', event)
+		document.addEventListener('touchend', () => document.removeEventListener('touchmove', event), { once: true })
+	}else{
+		document.addEventListener('mousemove', event)
+		document.addEventListener('mouseup', () => document.removeEventListener('mousemove', event), { once: true })
+	}
 }
 
 //Функция поиска стикера в стейте

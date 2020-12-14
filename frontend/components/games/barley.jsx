@@ -96,6 +96,12 @@ const shuffleState = (state) => {
 	return state;
 }
 
+function getPos(e){
+	if(e.touches)
+		e = e.touches[0]
+	return [ e.clientX, e.clientY ]
+}
+
 //Игра - пятнашки
 export default function Barley ({src, className}){
 
@@ -109,24 +115,34 @@ export default function Barley ({src, className}){
 	}, poses)
 
 	const onMouseDown = (_e, index) => {
-		const _pos = [_e.clientX, _e.clientY];
+
+		const _pos = getPos(_e);
+	
 		const move = (e) => {
-			const pos = [e.clientX, e.clientY];
+			const pos = getPos(e);
 			const delta = pos.map((i, _i) => i-_pos[_i]);
 
 			if(Math.abs(delta[0]) > 20){
 				setPoses(state => moveElementX(state, index, Math.sign(delta[0])));
 				document.removeEventListener('mousemove', move)
+				document.removeEventListener('touchmove', move)
 			}
 
 			if(Math.abs(delta[1]) > 20){
 				setPoses(state => moveElementY(state, index, Math.sign(delta[1])));
 				document.removeEventListener('mousemove', move)
+				document.removeEventListener('touchmove', move)
 			}
+			return false
 		}
-
-		document.addEventListener('mousemove', move);
-		document.addEventListener('mouseup', () => document.removeEventListener('mousemove', move), {once: true});
+		
+		if(_e.touches){
+			document.addEventListener('touchmove', move);
+			document.addEventListener('touchend', () => document.removeEventListener('touchmove', move), {once: true});
+		}else{
+			document.addEventListener('mousemove', move);
+			document.addEventListener('mouseup', () => document.removeEventListener('mousemove', move), {once: true});
+		}
 	}
 
 	const shuffle = () => {
@@ -155,7 +171,7 @@ export default function Barley ({src, className}){
 						height: 100/div+'%'
 					}}>
 						<button style={{backgroundImage: `url(${image})`, backgroundPosition: `${cell.x*100/(div-1)}% ${cell.y*100/(div-1)}%`}} 
-							onMouseDown={e => onMouseDown(e, poses.indexOf(index))}>
+							onMouseDown={e => onMouseDown(e, poses.indexOf(index))} onTouchStart={e => onMouseDown(e, poses.indexOf(index))}>
 						</button>
 					</div>
 				))}
