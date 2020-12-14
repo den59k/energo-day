@@ -1,16 +1,22 @@
 @import "styles/variables"
-	
+
+.background
+	background-image: url(/images/pattern.svg)
+	background-position: center
+	background-size: cover
+
 .votes
 	display: flex
 	padding: 0
 	flex-wrap: wrap
 	justify-content: space-between
-	margin-bottom: 50px
+	padding-bottom: 50px
 
 	li
 		list-style-type: none
 		text-align: center
 		margin: 45px 0
+		width: 380px
 		
 		&:last-child
 			margin: 45px auto
@@ -18,4 +24,5 @@
 		.description
 			color: #828282
 			margin: 1em 0
+			white-space: pre-wrap
 

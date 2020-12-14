@@ -9,9 +9,9 @@ const links = [
 	{ title: "Голосование за видеоролики", href: "/#congrulations" },
 	{ title: "Розыгрыш супер-приза", href: "/#congrulations", className: styles.big },
 	{ title: "Игротека", href: "/#congrulations" },
-	{ title: "Видеопоздравления", href: "/#congrulations" },
-	{ title: "Поздравить в чате", href: "/#congrulations" },
-	{ title: "Праздничное фото", href: "/#congrulations" },
+	{ title: "Видеопоздравления", href: "/#greetings" },
+	{ title: "Поздравить в чате", href: "/#chat" },
+	{ title: "Праздничное фото", href: "/#make-photo" },
 ]
 
 export default function HeadBlock(){

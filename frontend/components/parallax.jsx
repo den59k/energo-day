@@ -1,5 +1,7 @@
 import { useContext, createContext, useEffect, useState, useRef } from 'react';
 import cn from 'classnames'
+import { modal } from 'components/modal-window'
+import { last } from 'lodash';
 
 const ParallaxContext = createContext(0);
 
@@ -20,7 +22,8 @@ export function ParallaxProvider ({children}){
 		let stop = false
 
 		const loopParallax = () => {
-			if(Math.abs(window.pageYOffset-lastScroll) > 1){
+			if(!modal.opened && Math.abs(window.pageYOffset-lastScroll) > 1){
+				if(lastScroll === 0) lastScroll = window.pageYOffset
 				lastScroll = lastScroll+(window.pageYOffset-lastScroll)*0.4
 				setValue(lastScroll)
 			}

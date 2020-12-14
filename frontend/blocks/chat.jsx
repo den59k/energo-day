@@ -37,7 +37,7 @@ export default function ChatBlock (){
 	]
 
 	return (
-		<div className={cn("h flex-center", videoStyles.gradient, styles.container)} >
+		<div className={cn("h flex-center", videoStyles.gradient, styles.container)} id="chat">
 			<h2>Поздравительный чат</h2>
 			<div className={styles.chat}>
 				<div className={styles.chatInner}>

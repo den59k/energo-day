@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser')
+const userRoute = require('./auth')
 
 //Импортируем все файлы с роутами
 const baseRoutes = require('./base');
@@ -7,6 +8,7 @@ const servicesRoutes = require('./services')
 const imageRoutes = require('./images')
 
 module.exports = function (app, db) {
+
 	app.use(bodyParser.json())
 	app.use(bodyParser.raw({ limit: '5mb', type: 'image/*' }))
 

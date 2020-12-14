@@ -36,7 +36,7 @@ export default function GameBlock (){
 			<h2>Игротека</h2>
 			<div className={cn(styles.gameContainer, "container")}>
 				{games.map((item, index) => (
-					<div className={cn(activeGame < index && styles.hideLeft, activeGame > index && styles.hideRight)}>
+					<div key={index} className={cn(activeGame < index && styles.hideLeft, activeGame > index && styles.hideRight)}>
 						<h3>Игра «{item.title}»</h3>
 						<div className={styles.sub}>{item.sub}</div>
 						{item.component}

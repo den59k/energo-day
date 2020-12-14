@@ -1,7 +1,9 @@
 import cn from 'classnames'
 import { Parallax } from 'components/parallax'
 
-import styles from './styles/video-greetings.module.sass'
+import styles from './styles/photo-gallery.module.sass'
+
+import { openMakePhotoModal } from 'components/modal-window'
 
 const photos = [
 	{ src: "/db/photos/test.jpg", preview: "/db/photos/preview.jpg" },
@@ -27,8 +29,12 @@ function getPhotos(photos, start, end){
 
 export default function PhotoGallery (){	
 
+	const onMakePhoto = () => {
+		openMakePhotoModal()
+	}
+
 	return (
-		<div className={cn("h flex-center", styles.container2)} >
+		<div className={cn("h flex-center", styles.container)} id="make-photo">
 			
 			<h2>Праздничная фотогалерея</h2>
 			<div className={cn(styles.photoContainer, "container")}>
@@ -37,7 +43,7 @@ export default function PhotoGallery (){
 				<div className={styles.photos}>{getPhotos(photos, 8, 16)}</div>
 			</div>
 			<div className={styles.button}>
-				<button className="button">Сделать праздничное фото</button>
+				<button className="button" onClick={onMakePhoto}>Сделать праздничное фото</button>
 			</div>
 			<Parallax src="/images/salut-3.jpg" k={-0.3} className="cover z-1"/>
 		</div>
