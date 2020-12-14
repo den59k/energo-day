@@ -1,7 +1,6 @@
 import getDB from 'libs/db'
 import validate from 'libs/validate'
 import { nanoid } from 'nanoid'
-import etag from 'etag'
 
 const properties = {
 	index: { type: "integer" }
