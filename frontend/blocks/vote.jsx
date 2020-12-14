@@ -78,7 +78,7 @@ const time = "Голосование продлится с 12.00 до 16.00"
 export default function Vote(){
 	
 	return (
-		<div className={styles.background}>
+		<div className={styles.background} id="vote">
 			<h2>Голосование за лучший видеоролик к дню энергетика (до 16.00)</h2>
 			<ul className={cn(styles.votes, "container")}>
 				{clips.map((item, index) => (

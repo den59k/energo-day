@@ -22,9 +22,9 @@ const videos = [
 export default function VideoBlock4 (){
 
 	return (
-		<div className={cn("h", styles.gradient, "flex-center")}>
+		<div className={cn("h", styles.gradient, "flex-center")} id="video-4">
 			<Parallax src="/images/salut-4.jpg" k={-0.2} className="cover"/>
-			<h2>Праздничные поздравления</h2>
+			<h2>Поздравляем наших победителей</h2>
 			<div className={styles.videos}>
 				{videos.map((item, index) => (
 					<Video key={index} {...item} className={cn("border", videoStyles.smallTitle)}/>

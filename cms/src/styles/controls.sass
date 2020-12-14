@@ -259,6 +259,20 @@ button
 	&:active
 		background-color: darken($active-color, 7%)
 
+	&.red
+		background-color: $error
+		&:hover
+			background-color: lighten($error, 5%)
+		&:active
+			background-color: darken($error, 7%)
+
+	&.green 
+		background-color: $green
+		&:hover
+			background-color: lighten($green, 5%)
+		&:active
+			background-color: darken($green, 7%)
+
 .button
 	color: $active-color
 

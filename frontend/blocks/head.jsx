@@ -3,11 +3,11 @@ import Link from 'next/link'
 import styles from './styles/head.module.sass'
 
 const links = [
-	{ title: "Праздничные поздравления", href: "/#congrulations" },
-	{ title: "Награждение лучших сотрудников", href: "/#congrulations" },
-	{ title: "Наши победители", href: "/#congrulations" },
-	{ title: "Голосование за видеоролики", href: "/#congrulations" },
-	{ title: "Розыгрыш супер-приза", href: "/#congrulations", className: styles.big },
+	{ title: "Праздничные поздравления", href: "/#video-1" },
+	{ title: "Награждение лучших сотрудников", href: "/#video-2" },
+	{ title: "Наши победители", href: "/#video-4" },
+	{ title: "Голосование за видеоролики", href: "/#vote" },
+	{ title: "Розыгрыш супер-приза", href: "/#video-3", className: styles.big },
 	{ title: "Игротека", href: "/#congrulations" },
 	{ title: "Видеопоздравления", href: "/#greetings" },
 	{ title: "Поздравить в чате", href: "/#chat" },
@@ -15,8 +15,6 @@ const links = [
 ]
 
 export default function HeadBlock(){
-
-	
 
 	return (
 		<header className={styles.container}>

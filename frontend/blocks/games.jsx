@@ -32,7 +32,7 @@ export default function GameBlock (){
 	}
 
 	return (
-		<div className={cn("h flex-between", styles.container)} >
+		<div className={cn("h flex-between", styles.container)} id="games">
 			<h2>Игротека</h2>
 			<div className={cn(styles.gameContainer, "container")}>
 				{games.map((item, index) => (

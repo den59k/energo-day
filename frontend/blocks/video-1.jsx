@@ -21,7 +21,7 @@ const videos = [
 export default function VideoBlock1 (){
 
 	return (
-		<div className={cn("h", styles.gradient, "flex-center")} >
+		<div className={cn("h", styles.gradient, "flex-center")} id="video-1">
 			<h2>Праздничные поздравления</h2>
 			<div className={styles.videos}>
 				{videos.map((item, index) => (

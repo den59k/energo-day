@@ -11,7 +11,7 @@ const videos = [
 export default function VideoBlock1 (){
 
 	return (
-		<div className={cn("h", styles.gradient, "flex-center")}>
+		<div className={cn("h", styles.gradient, "flex-center")} id="video-2">
 			<Parallax src="/images/orel.svg" k={-0.3}/>
 			<h2>Награждение лучших сотрудников</h2>
 			<div className={styles.videos}>

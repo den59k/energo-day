@@ -4,9 +4,10 @@ import cn from 'classnames'
 import { IoIosClose } from 'react-icons/io'
 import { ModalForm, openModal } from './modal-form'
 import { ModalConfirm, openModalConfirm } from './modal-confirm'
-import { ModalMedia, openModalMedia } from './modal-media' 
+import { ModalPhoto, openModalPhoto } from './modal-photo'
+import { ModalVideo, openModalVideo } from './modal-video'
 
-export {ModalForm, openModal, ModalConfirm, openModalConfirm, ModalMedia, openModalMedia}
+export {ModalForm, openModal, ModalConfirm, openModalConfirm, ModalPhoto, openModalPhoto, ModalVideo, openModalVideo}
 
 export const modal = {
 	open: () => console.log("null action openModal"),

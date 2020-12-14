@@ -2,22 +2,27 @@ import cn from 'classnames'
 
 import styles from './styles/video-greetings.module.sass'
 import { openRecordModal } from 'components/modal-window'
+import { mutate } from 'swr'
+import { closeModal } from 'components/modal-window'
 
-const videos = [
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-]
 
-export default function VideoGreetingsBlock (){
+
+export default function VideoGreetingsBlock ({videos}){
 	
 	const newVideos = [ ...videos]
 	for(let i = 0; i < 15-videos.length; i++)
 		newVideos.push({})
 
 	const onClickRecord = () => {
-		openRecordModal()
+		openRecordModal(async (blob) => {
+			const json = await fetch('/api/videos/upload', {
+				method: 'POST',
+				body: blob
+			})
+			const resp = await json.json()
+			mutate('/api')
+			closeModal()
+		})
 	}
 
 	return (

@@ -7,6 +7,8 @@ const ParallaxContext = createContext(0);
 
 export function useParallax (element){
 	const value = useContext(ParallaxContext)
+	
+	if(modal.opened) return 0
 
 	if(element)
 		return element.getBoundingClientRect(element).top+window.pageYOffset-value
@@ -20,8 +22,9 @@ export function ParallaxProvider ({children}){
 	useEffect(() => {
 		let lastScroll = 0
 		let stop = false
-
+		
 		const loopParallax = () => {
+	
 			if(!modal.opened && Math.abs(window.pageYOffset-lastScroll) > 1){
 				if(lastScroll === 0) lastScroll = window.pageYOffset
 				lastScroll = lastScroll+(window.pageYOffset-lastScroll)*0.4

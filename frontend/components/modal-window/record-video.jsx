@@ -5,12 +5,15 @@ import { modal } from './index'
 import styles from './modal.module.sass'
 import { num } from 'libs/rus'
 
-function RecordModal ({id}){
+function RecordModal ({onSubmit}){
 	
 	const videoRef = useRef()
+	const bufferRef = useRef()
+
 	const [ mode, setMode ] = useState('')
 	const [ stream, setStream ] = useState(null)
 	const [ recorder, setRecorder ] = useState(null)
+
 	const [ timer, setTimer ] = useState(0)
 	const [ intervalObject, setIntervalObject ] = useState(null)
 	
@@ -21,6 +24,7 @@ function RecordModal ({id}){
 		.then(stream => {
 			videoRef.current.srcObject = stream
 			videoRef.current.play()
+			videoRef.current.muted = true
 			setStream(stream)
 			setMode('accepted')
 
@@ -34,10 +38,12 @@ function RecordModal ({id}){
 
 		//Мы начинаем запись, и возвращаем коллбэк, который выполнится при окончании
 		const recorder = startRecord(stream, (superBuffer) => {
-			videoRef.current.srcObject = null;
-			videoRef.current.src = window.URL.createObjectURL(superBuffer);
-			videoRef.current.play();
-			videoRef.current.controls = true;
+			videoRef.current.srcObject = null
+			bufferRef.current = superBuffer
+			videoRef.current.src = window.URL.createObjectURL(superBuffer)
+			videoRef.current.play()
+			videoRef.current.controls = true
+			videoRef.current.muted = false
 			setMode('recorded')
 		})
 		setMode('record')
@@ -55,12 +61,13 @@ function RecordModal ({id}){
 	const onAgain = () => {
 		videoRef.current.srcObject = stream
 		videoRef.current.play()
-		videoRef.current.controls = false;
+		videoRef.current.controls = false
+		videoRef.current.muted = true
 		setMode('accepted')
 	}
 
-	const onSave = () => {
-		
+	const onSave = async () => {
+		onSubmit(bufferRef.current)
 	}
 
 	return (
@@ -125,6 +132,6 @@ function startRecord(stream, onEnd){
 	return mediaRecorder;
 }
 
-export function openRecordModal (id){
-	modal.open(<RecordModal id={id}/>)
+export function openRecordModal (onSubmit){
+	modal.open(<RecordModal onSubmit={onSubmit}/>)
 }

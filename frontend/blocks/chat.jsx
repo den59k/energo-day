@@ -1,16 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import useSWR, { mutate } from 'swr'
 import cn from 'classnames'
 import { getChatDate } from 'libs/rus'
+import { GET, REST } from 'libs/fetch'
 
 import styles from './styles/chat.module.sass'
 import videoStyles from './styles/video.module.sass'
 
-const videos = [
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-	{ src: "/db/videos/video.mp4", preview: "/db/videos/preview.png" },
-]
 
 const fields = {
 	name: { label: "Имя" },
@@ -18,30 +14,39 @@ const fields = {
 	unit: { label: "Подразделение" },
 }
 
-export default function ChatBlock (){
-
+export default function ChatBlock ({messages}){
+	
 	const [ values, setValues ] = useState({})
+	const [ disable, setDisable ] = useState(false)
+	const chatRef = useRef()
+
+	const length = messages.length
+
+	useEffect(() => {
+		chatRef.current.scrollTop = 9999
+	}, [length])	
 
 	const onChange = (obj) => {
 		setValues({...values, ...obj})
 	}
 
-	const messages = [
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" },
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" },
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" },
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" },
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" },
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" },
-		{ name: "Сергей", surname: "Сергеев", unit: "Бухгалтерия", time: Date.now(), text: "Поздравляю!!!" }
-	]
+	const onSubmit = async () => {
+		if(disable) return
+		setDisable(true)
+	
+		const response = await REST('/api/chat', values)
+
+		setDisable(false)
+		onChange({text: ""})
+		mutate('/api')
+	}
 
 	return (
 		<div className={cn("h flex-center", videoStyles.gradient, styles.container)} id="chat">
 			<h2>Поздравительный чат</h2>
 			<div className={styles.chat}>
-				<div className={styles.chatInner}>
-					{messages.map((item, index) => <Message {...item} key={index} />)}
+				<div className={styles.chatInner} ref={chatRef}>
+					{messages && messages.map((item, index) => <Message {...item} key={index} />)}
 				</div>
 			</div>
 			<div className={cn(styles.inputArea, "container")}>
@@ -62,7 +67,9 @@ export default function ChatBlock (){
 						area={true}
 					/>
 					<div className={styles.buttons}>
-						<button className={styles.send}><img src="/images/send.svg" alt="Отправить"/></button>
+						<button className={styles.send} disabled={disable} onClick={onSubmit}>
+							<img src="/images/send.svg" alt="Отправить"/>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -91,16 +98,16 @@ function Message ({name, surname, unit, time, text}){
 function Input ({label, name, subName, onChange, value, area, className}){
 	
 	const _onChange = (e) => {
-		onChange({[name]: e.value})
+		onChange({[name]: e.currentTarget.value})
 	}
 
 	return (
 		<div className={cn(styles.input, className)}>
 			<label htmlFor={subName+"-"+name}>{label}</label>
 			{!area?(
-				<input id={"#"+subName+"-"+name} name={name} onChange={_onChange} value={value}/>
+				<input id={"#"+subName+"-"+name} name={name} onChange={_onChange} value={value || ""}/>
 			):(
-				<textarea id={"#"+subName+"-"+name} name={name} onChange={_onChange} value={value}/>
+				<textarea id={"#"+subName+"-"+name} name={name} onChange={_onChange} value={value || ""}/>
 			)}
 		</div>
 	)

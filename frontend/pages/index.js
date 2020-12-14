@@ -11,7 +11,16 @@ import PhotoGallery from 'blocks/photo-gallery'
 import GamesBlock from 'blocks/games'
 import LastBlock from 'blocks/last'
 
+import useSWR from 'swr'
+import { GET } from 'libs/fetch'
+
 export default function Home() {
+
+  const { data } = useSWR('/api', GET, { refreshInterval: 5000 })
+  const _data = data || { photos: [], videos: [], messages: [] }
+
+  console.log(_data)
+
   return (
     <Layout >
      <HeadBlock/>
@@ -20,9 +29,9 @@ export default function Home() {
      <VoteBlock/> 
      <VideoBlock3/>
      <VideoBlock4/>
-     <VideoGreetings/>
-     <Chat/>
-     <PhotoGallery/>
+     <VideoGreetings videos={_data.videos}/>
+     <Chat messages={_data.messages}/>
+     <PhotoGallery photos={_data.photos}/>
      <GamesBlock/>
      <LastBlock/>
     </Layout>
