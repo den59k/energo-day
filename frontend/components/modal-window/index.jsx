@@ -5,8 +5,9 @@ import styles from './modal.module.sass'
 import { openYoutubeModal } from './youtube'
 import { openRecordModal } from './record-video'
 import { openMakePhotoModal } from './make-photo'
+import { openVideoModal } from './video'
 
-export { openYoutubeModal, openRecordModal, openMakePhotoModal }
+export { openYoutubeModal, openRecordModal, openMakePhotoModal, openVideoModal }
 
 export const modal = {
 	open: () => console.log("null action openModal"),

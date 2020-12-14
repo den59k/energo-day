@@ -6,6 +6,7 @@ const properties = {
 	surname: { type: "string", maxLength: 100  },
 	unit: { type: "string" },
 	text: { type: "string", minLength: 4 },
+	avatar: { type: "string" }
 }
 
 const schema = { properties, required: ["name", "text"] }

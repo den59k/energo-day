@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Video from 'components/video'
 
 import styles from './styles/head.module.sass'
 
@@ -14,10 +15,15 @@ const links = [
 	{ title: "Праздничное фото", href: "/#make-photo" },
 ]
 
+const videoInfo = { 
+	time: "Праздничная трансляция начнется в 10:00",
+	id: "HOz34_2Z-mw" 
+}
+
 export default function HeadBlock(){
 
 	return (
-		<header className={styles.container}>
+		<header className={styles.container} id="head">
 			<div className="container h">
 				<div className={styles.top}>
 					<img src={"/images/logo.png"} alt="Логотип пермэнергосбыт" className={styles.logo}/>
@@ -27,7 +33,7 @@ export default function HeadBlock(){
 					</div>
 				</div>
 
-				<img src={"/images/preview-top.jpg"} alt="Превью видео" style={{display: "block", margin: "0 auto", alignSelf: "center"}}/>
+				<Video {...videoInfo} className={styles.video}/>
 				<div className={styles.buttons}>
 					{links.map((item, index) => (
 						<Link href={item.href} key={index}>

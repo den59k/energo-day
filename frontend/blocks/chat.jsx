@@ -3,6 +3,7 @@ import useSWR, { mutate } from 'swr'
 import cn from 'classnames'
 import { getChatDate } from 'libs/rus'
 import { GET, REST } from 'libs/fetch'
+import loadFile from 'libs/file-loader'
 
 import styles from './styles/chat.module.sass'
 import videoStyles from './styles/video.module.sass'
@@ -18,7 +19,9 @@ export default function ChatBlock ({messages}){
 	
 	const [ values, setValues ] = useState({})
 	const [ disable, setDisable ] = useState(false)
+
 	const chatRef = useRef()
+	const fileRef = useRef()
 
 	const length = messages.length
 
@@ -41,8 +44,25 @@ export default function ChatBlock ({messages}){
 		mutate('/api')
 	}
 
+	const onFileChange = async (e) => {
+		const file = e.target.files[0]
+		if(!file) return
+		e.target.value = ""
+
+		const body = await loadFile(file)
+		const headers = { 'Content-Type': file.type };
+
+		const json = await fetch('/api/chat/upload', { method: 'POST', headers, body } )
+		const resp = await json.json()
+		
+		if(resp.error) return
+	
+		onChange({avatar: resp.src})
+	}
+
 	return (
 		<div className={cn("h flex-center", videoStyles.gradient, styles.container)} id="chat">
+			<input onChange={onFileChange} ref={fileRef} type="file" accept="image/*" style={{display: "none"}}/>
 			<h2>Поздравительный чат</h2>
 			<div className={styles.chat}>
 				<div className={styles.chatInner} ref={chatRef}>
@@ -67,6 +87,17 @@ export default function ChatBlock ({messages}){
 						area={true}
 					/>
 					<div className={styles.buttons}>
+						{values.avatar?(
+							<button 
+								className={styles.avatarButton} 
+								onClick={() => fileRef.current.click()} 
+								style={{backgroundImage: `url(${values.avatar})`}}
+							></button>
+						):(
+							<button className={styles.photoButton} onClick={() => fileRef.current.click()}>
+								<img src="/images/icons/photo.svg" alt="Сделать фото"/>
+							</button>
+						)}
 						<button className={styles.send} disabled={disable} onClick={onSubmit}>
 							<img src="/images/send.svg" alt="Отправить"/>
 						</button>
@@ -77,11 +108,11 @@ export default function ChatBlock ({messages}){
 	)
 }
 
-function Message ({name, surname, unit, time, text}){
+function Message ({name, surname, unit, time, text, avatar}){
 
 	return (
 		<div className={styles.message}>
-			<div className={styles.avatar}></div>
+			<div className={styles.avatar} style={avatar?{backgroundImage: `url(${avatar})`}:{}}></div>
 			<div className={styles.content}>
 				<div className={styles.header}>
 					<div className={styles.name}>{name} {surname}</div>

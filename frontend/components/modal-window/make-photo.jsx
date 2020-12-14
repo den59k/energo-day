@@ -6,7 +6,7 @@ import { getCanvasBlob, redraw, video2canvas, getStyleButton, findSticker, addPo
 import styles from './modal.module.sass'
 
 const stickers = [];
-for(let i = 1; i <= 9; i++)
+for(let i = 1; i <= 10; i++)
 	stickers.push('/images/stickers/'+i+'.svg')
 
 function MakePhotoModal ({onSubmit}){

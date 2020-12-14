@@ -17,7 +17,7 @@ import { GET } from 'libs/fetch'
 export default function Home() {
 
   const { data } = useSWR('/api', GET, { refreshInterval: 5000 })
-  const _data = data || { photos: [], videos: [], messages: [] }
+  const _data = data || { photos: [], videos: [], messages: [], indexes: [] }
 
   console.log(_data)
 
@@ -26,7 +26,7 @@ export default function Home() {
      <HeadBlock/>
      <VideoBlock1/>
      <VideoBlock2/>
-     <VoteBlock/> 
+     <VoteBlock indexes={_data.indexes} likes={_data.likes}/> 
      <VideoBlock3/>
      <VideoBlock4/>
      <VideoGreetings videos={_data.videos}/>

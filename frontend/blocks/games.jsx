@@ -45,8 +45,10 @@ export default function GameBlock (){
 
 				<button className={cn(styles.leftArrow, activeGame === 0 && styles.hide)} onClick={() => slide(-1)}>
 					<img src="/images/arrow-left.svg" alt="Стрелка влево"/>
+					Листать
 				</button>
 				<button className={cn(styles.rightArrow, activeGame === games.length-1 && styles.hide)} onClick={() => slide(1)}>
+					Листать
 					<img src="/images/arrow-left.svg" alt="Стрелка вправо"/>
 				</button>
 			</div>

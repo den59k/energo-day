@@ -1,11 +1,8 @@
 import cn from 'classnames'
 
 import styles from './styles/video-greetings.module.sass'
-import { openRecordModal } from 'components/modal-window'
+import { openRecordModal, openVideoModal, closeModal } from 'components/modal-window'
 import { mutate } from 'swr'
-import { closeModal } from 'components/modal-window'
-
-
 
 export default function VideoGreetingsBlock ({videos}){
 	
@@ -25,11 +22,15 @@ export default function VideoGreetingsBlock ({videos}){
 		})
 	}
 
+	const onClickItem = (src) => {
+		openVideoModal(src)
+	}
+
 	return (
 		<div className={cn("h flex-center", styles.container)} id="greetings">
 			<h2>Галерея видеопоздравлений от коллег</h2>
 			<div className={cn(styles.videoContainer, "container")}>
-				{newVideos.map((item, index) => <Video key={index} {...item}/>)}
+				{newVideos.map((item, index) => <Video key={index} {...item} onClickItem={onClickItem}/>)}
 			</div>
 			<div className={styles.button}>
 				<button className="button" onClick={onClickRecord}>Записать видеопоздравление</button>
@@ -38,10 +39,14 @@ export default function VideoGreetingsBlock ({videos}){
 	)
 }
 
-function Video ({ preview, src }){
+function Video ({ preview, src, onClickItem}){
 
 	return (
-		<button className={cn(styles.video, src && styles.active)} style={preview?{backgroundImage: `url(${preview})` }: {}}>
+		<button 
+			onClick={() => onClickItem(src)}
+			className={cn(styles.video, src && styles.active)} 
+			style={preview?{backgroundImage: `url(${preview})` }: {}}
+		>
 			<img src="/images/play.svg" alt="Кнопка play"/>
 		</button>
 	)

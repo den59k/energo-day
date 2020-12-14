@@ -6,7 +6,22 @@ async function initialize(){
 
 	const client = await mongoClient.connect();
 
-	return client.db(process.env.DB_NAME)
+	const db = client.db(process.env.DB_NAME)
+
+	const dbNames = await db.listCollections({}).map(e => e.name).toArray();
+
+	if(!dbNames.includes('likes')){
+		const collection = await db.createCollection('likes')
+		collection.createIndex({'ip': 1, 'index': 1}, { unique: true })
+	}
+
+	if(!dbNames.includes('votes')){
+		const collection = await db.createCollection('votes')
+		for(let i = 0; i < 13; i++)
+			collection.insertOne({index: i, likes: 0})
+	}
+
+	return db
 }
 
 let db

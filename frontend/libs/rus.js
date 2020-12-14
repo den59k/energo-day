@@ -26,7 +26,7 @@ function _ (num){
 export function getChatDate(date){
 	const dt = new Date(date)
 
-	return `${_(dt.getDate())}.${_(dt.getMonth())}.${dt.getFullYear()}. в ${(dt.getHours())}:${_(dt.getMinutes())}`
+	return `${_(dt.getDate())}.${_(dt.getMonth()+1)}.${dt.getFullYear()}. в ${(dt.getHours())}:${_(dt.getMinutes())}`
 }
 
 export function _lang(item, lang){

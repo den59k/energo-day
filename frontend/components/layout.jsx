@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { ParallaxProvider } from 'components/parallax'
 import { ModalWrapper } from 'components/modal-window'
+import UpButton from 'components/up-button'
 
 export default function Layout ({children}){
 
@@ -15,6 +16,7 @@ export default function Layout ({children}){
 			<ModalWrapper>
 				{children}
 			</ModalWrapper>
+			<UpButton/>
 		</ParallaxProvider>
 	)
 }

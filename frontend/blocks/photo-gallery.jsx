@@ -5,7 +5,7 @@ import useSWR, { mutate } from 'swr'
 
 import styles from './styles/photo-gallery.module.sass'
 
-import { openMakePhotoModal } from 'components/modal-window'
+import { openMakePhotoModal, closeModal } from 'components/modal-window'
 
 
 function getPhotos(photos, start, end, onPhotoClick){
