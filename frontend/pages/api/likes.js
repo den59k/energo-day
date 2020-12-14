@@ -13,12 +13,12 @@ export default async (req, res) => {
 	const db = await getDB('likes')
 	const voteDB = await getDB('votes')
 
-	const token = req.cookies.token
-
+	let token = req.cookies.token
 	if(!token){
-		let token = nanoid(30)
+		token = nanoid(30)
 		res.setHeader("Set-Cookie", `token=${token};max-age=31536000; path=/;`)
 	}
+	
 	try{
 		if(req.method === 'POST'){
 			if(!validate(req, res, schema)) return
