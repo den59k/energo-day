@@ -2,7 +2,6 @@ import { nanoid } from 'nanoid'
 import getDB from 'libs/db'
 import fs from 'fs'
 import getRawBody from 'raw-body'
-import mime from 'mime-types'
 import sharp from 'sharp'
 
 const path = '/db/photos/'
