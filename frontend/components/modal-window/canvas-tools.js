@@ -46,7 +46,7 @@ export function calcZoom (stickerPos, oldPos, newPos){
 //Функция добавление событий перемещения
 export function addPointerEvent (event, touch=false) {
 	if(touch){
-		document.addEventListener('touchmove', event)
+		document.addEventListener('touchmove', event, { passive: false })
 		document.addEventListener('touchend', () => document.removeEventListener('touchmove', event), { once: true })
 	}else{
 		document.addEventListener('mousemove', event)

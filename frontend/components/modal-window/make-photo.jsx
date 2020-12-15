@@ -79,6 +79,8 @@ function MakePhotoModal ({onSubmit}){
 		
 		const startStickerPos = stickerState[stickerIndex]
 		addPointerEvent(e => {
+			e.preventDefault()
+			e.stopPropagation()
 			const newPos = calcPos(e, canvasRef.current)
 			setStickerState(stickerState.map((item, index) => (index !== stickerIndex)? item: {
 				...item,
@@ -93,6 +95,8 @@ function MakePhotoModal ({onSubmit}){
 		const pos = calcPos(e, canvasRef.current)
 		const startStickerPos = stickerState[targetSticker]
 		addPointerEvent((e) => {
+			e.preventDefault()
+			e.stopPropagation()
 			const newPos = calcPos(e, canvasRef.current)
 			const angle = calcAngle(startStickerPos, pos, newPos)
 
@@ -105,9 +109,12 @@ function MakePhotoModal ({onSubmit}){
 
 	const scaleSticker = (e) => {
 		e.preventDefault()
+		
 		const pos = calcPos(e, canvasRef.current)
 		const startStickerPos = stickerState[targetSticker]
 		addPointerEvent((e) => {
+			e.preventDefault()
+			e.stopPropagation()
 			const newPos = calcPos(e, canvasRef.current)
 			const zoom = calcZoom(startStickerPos, pos, newPos)
 

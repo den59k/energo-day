@@ -74,7 +74,7 @@ function RecordModal ({onSubmit}){
 		<div className={cn(styles.modal, styles.video, (mode === 'permission' || mode === 'not-accepted') && styles.permission)}>
 			{mode === 'permission' && (<div>Разрешите доступ к камере и к микрофону</div>)}
 			{mode === 'not-accepted' && (<div>В вашем браузере произошла ошибка.<br/>Воспользуйтесь другим браузером</div>)}
-			<video ref={videoRef}></video>
+			<video playsInline={true} ref={videoRef}></video>
 			{mode ==='record' && <div className={styles.recordAlert}>Идет запись! - {num(timer, "секунда", "секунды", "секунд")}</div>}
 			<div className={styles.buttons}>
 				{mode === 'accepted' && <button className={cn("button")} onClick={onStartRecord}>Начать запись</button>}
