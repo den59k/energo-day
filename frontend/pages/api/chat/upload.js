@@ -18,7 +18,7 @@ export default async (req, res) => {
 			const buffer = await getRawBody(req, { length: req.headers['content-length'], limit: '5mb'});
 
 			const preview = path+nanoid(20) + ".jpg"
-			await sharp(buffer).resize({width: 80, height: 80, fit: 'cover'}).jpeg({quality: 75}).toFile(publicPath+preview)
+			await sharp(buffer).rotate().resize({width: 80, height: 80, fit: 'cover'}).jpeg({quality: 75}).toFile(publicPath+preview)
 
 			res.json({src: preview})
 		}catch(e){

@@ -10,8 +10,8 @@ import videoStyles from './styles/video.module.sass'
 
 
 const fields = {
-	name: { label: "Имя" },
-	surname: { label: "Фамилия" },
+	name: { label: "Имя", className: styles.double },
+	surname: { label: "Фамилия", className: styles.double },
 	unit: { label: "Подразделение" },
 }
 

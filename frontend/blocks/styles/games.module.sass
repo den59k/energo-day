@@ -28,16 +28,22 @@
 	transform: translateX(500px)
 
 .gameContainer
-	margin: auto auto
 	flex: 0 0 auto
 	position: relative
+	
+	@media(min-height: 800px)
+		margin-top: 10vh
+
+	@media(max-width: 1320px)
+		margin-bottom: 80px
+		margin-top: 2vh
 
 	&>div
 		transition: 0.5s
-		height: 600px
 
 	h3
 		color: $primary
+		margin-top: 0
 		margin-bottom: 0.5em
 
 	button
@@ -62,14 +68,24 @@
 	
 	color: $primary
 
+	@media(max-width: 1320px)
+		top: 105%
+	
 	&.hide
 		opacity: 0
 		transform: scale(0.7)
+		pointer-events: none
 
 .leftArrow
-	left: -55px
+	margin-left: -55px
 	img 
 		transform: rotate(180deg)
 
+	@media(max-width: 1320px)
+		left: 50%
+
 .rightArrow
-	right: -55px
+	margin-right: -55px
+
+	@media(max-width: 1320px)
+		right: 50%

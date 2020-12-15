@@ -134,7 +134,7 @@ function MakePhotoModal ({onSubmit}){
 	return (
 		<div className={cn(styles.modal, styles.makePhoto, mode==='stickers' && styles.up)}>
 			{mode === 'permission' && <div className={styles.label}>Дайте разрешение на использование камеры</div>}
-			<video muted={true} ref={videoRef} style={mode === 'accepted'?{}: {display: 'none'}}/>
+			<video muted={true} playsInline={true} controls={false} ref={videoRef} style={mode === 'accepted'?{}: {display: 'none'}}/>
 
 			<canvas ref={canvasRef} style={mode === 'stickers'?{}: {display: 'none'}} onMouseDown={onPointerCanvasDown} onTouchStart={onPointerCanvasDown}/>
 

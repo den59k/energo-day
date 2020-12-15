@@ -40,7 +40,7 @@ export default function GameBlock (){
 	]
 	
 	return (
-		<div className={cn("h flex-between", styles.container)} id="games">
+		<div className={cn("h", styles.container)} id="games">
 			<Firework play={fireworkPlay}/>
 			<h2>Игротека</h2>
 			<div className={cn(styles.gameContainer, "container")}>

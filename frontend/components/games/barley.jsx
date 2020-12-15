@@ -135,6 +135,8 @@ export default function Barley ({src, className, onWin}){
 		const _pos = getPos(_e);
 	
 		const move = (e) => {
+			e.preventDefault()
+			e.stopPropagation()
 			const pos = getPos(e);
 			const delta = pos.map((i, _i) => i-_pos[_i]);
 
@@ -153,7 +155,7 @@ export default function Barley ({src, className, onWin}){
 		}
 		
 		if(_e.touches){
-			document.addEventListener('touchmove', move);
+			document.addEventListener('touchmove', move, { passive: false });
 			document.addEventListener('touchend', () => document.removeEventListener('touchmove', move), {once: true});
 		}else{
 			document.addEventListener('mousemove', move);
