@@ -12,6 +12,7 @@ $width: 170px
 	border: none
 	padding: 0
 	position: relative 
+	perspective: 600px 
 
 	div
 		top: 0
@@ -21,18 +22,28 @@ $width: 170px
 		background-position: center
 		background-size: cover
 		position: absolute
+		backface-visibility: hidden
+		transition: 0.6s
+		
+
+	.avers
+		transform: rotateY(180deg)
 
 	.revers
 		background-image: url(/images/avers.svg)
-		transition: 0.2s
-
+		transform: rotateY(0)
+		
 	&.opened
+		.avers
+			transform: rotateY(360deg)
+		
 		.revers
-			opacity: 0
+			transform: rotateY(180deg)
+
 
 .button
 	margin-top: 20px
-	transition: 0.2s
+	transition: 0.3s
 
 	&.hide
 		opacity: 0

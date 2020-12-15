@@ -10,7 +10,7 @@ for(let i = 1; i <= 9; i++){
 	images.push({ src: "/images/memo/"+i+".jpg", image: i-1 })
 }
 
-export default function Pair({className}){
+export default function Pair({className, onWin}){
 
 	const [ opened, setOpened ] = useState([])
 	const [ tempOpened, setTempOpened ] = useState(-1)
@@ -19,6 +19,11 @@ export default function Pair({className}){
 	useEffect(() => {
 		setShuffle(_.shuffle(images))
 	}, [])
+
+	useEffect(() => {
+		if(opened.length >= images.length/2)
+			onWin()
+	}, [opened])
 
 	const playAgain = () => {
 		setOpened([])

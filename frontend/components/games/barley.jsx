@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './barley.module.sass'
+import cn from 'classnames'
 
 const cells = [];
 
@@ -102,17 +103,32 @@ function getPos(e){
 	return [ e.clientX, e.clientY ]
 }
 
-//Игра - пятнашки
-export default function Barley ({src, className}){
+function isWin (poses){
+	for(let i = 0; i < div*div-1; i++)
+		if(poses[i] !== i) return false
+	
+	return true
+}
 
-	const [poses, setPoses] = useState(indexes)
-	const [steps, setSteps] = useState(-1)
+//Игра - пятнашки
+export default function Barley ({src, className, onWin}){
+
+	const [ poses, setPoses ] = useState(indexes)
+	const [ steps, setSteps ] = useState(-1)
+	const [ started, setStarted ] = useState(false)
 
 	const image = src
 
 	useEffect(() => {
 		setSteps(steps => steps+1)
-	}, poses)
+	}, [poses])
+
+	useEffect(() => {
+		if(started && isWin(poses)){
+			onWin()
+			setStarted(false)
+		}
+	}, [poses, started])
 
 	const onMouseDown = (_e, index) => {
 
@@ -154,7 +170,8 @@ export default function Barley ({src, className}){
 			counter++;
 			if(counter > 50){
 				clearInterval(interval)
-				setSteps(-1)
+				setStarted(true)
+				setSteps(0)
 			}
 		}, 100);
 
@@ -177,7 +194,7 @@ export default function Barley ({src, className}){
 				))}
 			</div>
 			<div className={styles.panel}>
-				<button className="button" onClick={shuffle}>Перемешать</button>
+				<button className={cn("button", started && styles.hide)} onClick={shuffle}>Перемешать</button>
 				<div>
 					<div>Ходы: {steps}</div>
 				</div>
