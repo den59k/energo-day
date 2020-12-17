@@ -5,7 +5,7 @@ import styles from './styles/video.module.sass'
 import Video from 'components/video'
 
 const videos = [
-	{ time: "Повтор будет доступен к просмотру с 12.00", id: "HOz34_2Z-mw"  },
+	{ time: "Повтор будет доступен к просмотру с 12.00", id: "ZkpBLFU6sBE"  },
 ]
 
 export default function VideoBlock1 (){

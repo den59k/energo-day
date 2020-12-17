@@ -181,6 +181,7 @@ export default function Barley ({src, className, onWin}){
 
 	return (
 		<div className={className}>
+			<div className={styles.preview} style={{backgroundImage: `url(${image})`}}></div>
 			<div className={styles.container}>
 				{cells.map((cell, index) => (
 					<div className={styles.cell} key={cell.x+ " "+cell.y} style={{
