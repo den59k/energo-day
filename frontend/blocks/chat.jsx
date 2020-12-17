@@ -27,6 +27,7 @@ export default function ChatBlock ({messages}){
 
 	useEffect(() => {
 		chatRef.current.scrollTop = 9999
+		chatRef.current.parentElement.scrollTop = 9999
 	}, [length])	
 
 	const onChange = (obj) => {

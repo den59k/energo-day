@@ -32,17 +32,20 @@
 	background-size: contain
 	padding: 12px 0
 	overflow: hidden
+	
+	@media(max-width: 600px)
+		overflow-y: auto
+		overflow-x: hidden
+		-webkit-overflow-scrolling: touch
 
 	.chatInner
 		background-color: white
 		width: 900px
-		height: 100%
 		margin: auto
 		border: 1px solid #E0E0E0
 		border-radius: 7px
-		overflow: auto
-		overflow-x: hidden
-		-webkit-overflow-scrolling: touch
+		overflow-y: auto
+		height: 100%
 
 		@media(max-width: 940px)
 			width: 97vw
