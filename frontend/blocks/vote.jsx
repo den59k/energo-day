@@ -70,8 +70,10 @@ const clips = [
 	},
 	{ 
 		title: "Кудымкарское отделение", 
+		type: 'wistia',
 		description: "Наш фильм о развитии электроэнергетики.\nКакой будет для нас энергетика будущего,\nс ее инновациями и новыми технологиями?\nПредставить трудно!\nА давайте вернемся лет так на 55 назад,\nведь история праздника «День энергетика»\nначалась именно тогда.",
-		id: "-s6JmyvYZ2A" 
+		id: "xroldczgu9"
+		//id: 'URCrIe66Dt8'
 	},
 ]
 
@@ -84,15 +86,13 @@ export default function Vote({likes, indexes}){
 		if(!resp.error) mutate('/api')
 	}
 
-	console.log(indexes)
-
 	return (
 		<div className={styles.background} id="vote">
 			<h2>Голосование за лучший видеоролик к дню энергетика (до 16.00)</h2>
 			<ul className={cn(styles.votes, "container")}>
 				{clips.map((item, index) => (
 					<li key={index}>
-						<Video title={item.title} className={videoStyles.small} time={time} id={item.id}/>
+						<Video title={item.title} className={videoStyles.small} time={time} id={item.id} type={item.type}/>
 						<div className={styles.description}>{item.description}</div>
 						{indexes.find(item => item.index===index)?(
 							<button className={cn("button", styles.button)} onClick={() => onLike(index)}>

@@ -183,7 +183,7 @@
 				margin-right: auto
 
 	&.up
-		margin-top: -200px
+		margin-top: -220px
 
 		img
 			max-height: 70px
@@ -218,3 +218,23 @@
 			background-color: lighten($red, 13%)
 
 
+.loader
+	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	background-color: rgba(255, 255, 255, 0.8)
+	display: flex
+	justify-content: center
+	align-items: center
+	
+	img
+		height: 70px
+		animation: rotate 1.2s linear infinite
+
+@keyframes rotate
+	0%
+		transform: rotate(0deg)
+	100%
+		transform: rotate(360deg)

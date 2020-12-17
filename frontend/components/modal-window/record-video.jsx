@@ -67,11 +67,13 @@ function RecordModal ({onSubmit}){
 	}
 
 	const onSave = async () => {
+		setMode('saving')
 		onSubmit(bufferRef.current)
 	}
 
 	return (
 		<div className={cn(styles.modal, styles.video, (mode === 'permission' || mode === 'not-accepted') && styles.permission)}>
+			{mode === 'saving' && <div className={styles.loader}><img src="/images/loader.png" alt="Загрузка..."/></div>}
 			{mode === 'permission' && (<div>Разрешите доступ к камере и к микрофону</div>)}
 			{mode === 'not-accepted' && (<div>В вашем браузере произошла ошибка.<br/>Воспользуйтесь другим браузером</div>)}
 			<video playsInline={true} ref={videoRef}></video>

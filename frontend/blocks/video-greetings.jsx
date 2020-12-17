@@ -56,11 +56,11 @@ export default function VideoGreetingsBlock ({videos}){
 	)
 }
 
-function Video ({ preview, src, onClickItem}){
-
+function Video ({ preview, src, onClickItem, transcoded}){
+	
 	return (
 		<button 
-			onClick={() => onClickItem(src)}
+			onClick={() => onClickItem(transcoded || src)}
 			className={cn(styles.video, src && styles.active)} 
 			style={preview?{backgroundImage: `url(${preview})` }: {}}
 		>

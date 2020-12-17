@@ -134,7 +134,7 @@ function MakePhotoModal ({onSubmit}){
 		const buffer = await getCanvasBlob(canvasRef.current);
 		if(!buffer || buffer.length === 0)
 			return;
-
+		setMode('saving')
 		onSubmit(buffer)
 	}
 

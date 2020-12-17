@@ -4,6 +4,8 @@ const userRoute = require('./auth')
 //Импортируем все файлы с роутами
 const baseRoutes = require('./base')
 const chatRoutes = require('./chat')
+const photoRoutes = require('./photos')
+const videoRoutes = require('./videos')
 
 module.exports = function (app, db) {
 
@@ -12,9 +14,11 @@ module.exports = function (app, db) {
 
 	baseRoutes(app, db)
 	chatRoutes(app, db)
+	photoRoutes(app, db)
+	videoRoutes(app, db)
 
-	app.use(function(err, _req, res) {
-		console.log(err)
+	app.use(function(err, _req, res, _next) {
+		console.log("ERROR")
 		res.json({error: "error"})
 	})
 	// Тут, позже, будут и другие обработчики маршрутов 

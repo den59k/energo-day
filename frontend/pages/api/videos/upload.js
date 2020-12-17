@@ -3,7 +3,6 @@ import getDB from 'libs/db'
 import fs from 'fs'
 import getRawBody from 'raw-body'
 import { getExtension } from 'mime'
-import sharp from 'sharp'
 import ffmpeg from 'fluent-ffmpeg'
 
 const path = '/db/videos/'
@@ -24,6 +23,9 @@ const createPreview = (pathVideo, pathPreview) => new Promise((res, rej) => {
   });
 })
 
+const delay = (seconds) => new Promise((res, rej) => {
+	setTimeout(res, seconds)
+})
 
 export default async (req, res) => {
 
@@ -44,7 +46,6 @@ export default async (req, res) => {
 			await createPreview(publicPath+src, publicPath+preview)
 			
 			await db.insertOne({ src, preview, time: Date.now(), accepted: true })
-
 			res.json({src, preview})
 		}catch(e){
 			console.log(e)
