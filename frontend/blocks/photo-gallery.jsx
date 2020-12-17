@@ -14,7 +14,7 @@ function getPhotos(photos, start, end, onPhotoClick){
 		<button 
 			key={index} 
 			className={styles.photo} 
-			onClick={() => onPhotoClick(index)}
+			onClick={() => onPhotoClick(start+index)}
 			style={{backgroundImage: `url(${item.preview})`}}
 		></button>
 	))
@@ -29,6 +29,7 @@ function getPhotos(photos, start, end, onPhotoClick){
 export default function PhotoGallery ({photos}){	
 
 	const [ currentPhoto, setCurrentPhoto ] = useState(0)
+	const [ mobileBigPhoto, setMobileBigPhoto ] = useState(false)
 	const [ count, setCount ] = useState()
 
 	const onMakePhoto = () => {
@@ -62,6 +63,7 @@ export default function PhotoGallery ({photos}){
 	}, [])
 
 	const onPhotoClick = (index) => {
+		setMobileBigPhoto(true)
 		setCurrentPhoto(index)
 	}
 
@@ -70,14 +72,16 @@ export default function PhotoGallery ({photos}){
 			
 			<h2>Праздничная фотогалерея</h2>
 			<div className={cn(styles.photoContainer, "container")}>
-				<div className={styles.photos}>{getPhotos(photos, 0, count, onPhotoClick)}</div>
+				<div className={cn(styles.photos, styles.left)}>{getPhotos(photos, 0, count, onPhotoClick)}</div>
 
 				<div 
-					className={styles.bigImage} 
+					className={cn(styles.bigImage, mobileBigPhoto && styles.open)} 
 					style={{backgroundImage: `url(${photos[currentPhoto]?photos[currentPhoto].src: '/images/avers.svg'})`}}
-				></div>
+				>
+					<button className={styles.close} onClick={() => setMobileBigPhoto(false)}></button>
+				</div>
 
-				<div className={styles.photos}>{getPhotos(photos, count, count*2, onPhotoClick)}</div>
+				<div className={cn(styles.photos, styles.right)}>{getPhotos(photos, count, count*2, onPhotoClick)}</div>
 			</div>
 			<div className={styles.button}>
 				<button className="button" onClick={onMakePhoto}>Сделать праздничное фото</button>

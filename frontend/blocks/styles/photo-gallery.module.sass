@@ -27,7 +27,12 @@
 		margin: 0 5px
 	
 	@media(max-width: 760px)
-		justify-content: center
+		&.left
+			justify-content: flex-end
+		
+		&.right
+			justify-content: flex-start
+
 		margin: 0
 
 
@@ -50,7 +55,47 @@
 	background-size: cover
 	margin: 0 15px
 
-	@media(max-width: 950px)
+	.close
 		display: none
+		position: absolute
+		right: -20px
+		top: -20px
+		width: 40px
+		height: 40px
+		background: none
+		border: none
+		outline: none
+		background-image: url(/images/icons/close.svg)
+		background-size: cover
+		background-position: center
 
+	@media(max-width: 950px)
+		position: absolute
+		width: 74vw
+		height: 74vw
+		margin-left: -37vw
+		left: 50%
+		top: 17vh
+		border: 20px solid white
+		opacity: 0
+		pointer-events: none
+		visibility: hidden
+		transition: 0.15s
+		transform: scale(0.7)
+
+		&.open
+			transform: none
+			opacity: 1
+			visibility: visible
+			pointer-events: all
+
+		.close
+			display: block
+
+		@media(max-width: 500px)
+			width: 88vw
+			height: 88vw
+			margin-left: -44vw
+
+			
 
