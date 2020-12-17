@@ -3,10 +3,37 @@
 	border-radius: 20px
 	padding: 10px 30px
 
+	.search
+		margin: 10px 0
+		max-width: 450px
+
+	.buttons
+		display: flex
+		align-items: center
+
+		button
+			opacity: 0
+
+		.delete
+			margin: 0
+			margin-right: -10px
+			margin-left: auto
+			font-size: 20px
+			height: auto
+			padding: 0.3em 0.5em
+			opacity: 0
+			color: $red
+
 	.chat-item
 		display: flex
 		padding: 10px 0
 		border-bottom: 1px solid $light
+
+		&:hover
+			.delete
+				opacity: 1
+			button
+				opacity: 1
 
 		&:last-child
 			border: none

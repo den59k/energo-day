@@ -27,4 +27,12 @@ function toDotNotation (_data, startString=""){
 	return data
 }
 
-module.exports = { toMultiLanguage, toDotNotation }
+function filterBody (body, schema){
+	const data = {}
+	for(let key in body)
+		if(key in schema)
+			data[key] = body[key]
+	return data
+}
+
+module.exports = { toMultiLanguage, toDotNotation, filterBody }
