@@ -7,6 +7,7 @@ function VideoModal ({src}){
 
 	return (
 		<div className={cn(styles.modal, styles.video)}>
+			<button onClick={modal.close} className={styles.closeButton}><img src="/images/icons/close.svg" alt="Закрыть окно"/></button>
 			<video src={src} controls={true} autoPlay={true}/>
 		</div>
 	)

@@ -140,6 +140,7 @@ function MakePhotoModal ({onSubmit}){
 
 	return (
 		<div className={cn(styles.modal, styles.makePhoto, mode==='stickers' && styles.up)}>
+			<button onClick={modal.close} className={styles.closeButton}><img src="/images/icons/close.svg" alt="Закрыть окно"/></button>
 			{mode === 'permission' && <div className={styles.label}>Дайте разрешение на использование камеры</div>}
 			<video muted={true} playsInline={true} controls={false} ref={videoRef} style={mode === 'accepted'?{}: {display: 'none'}}/>
 

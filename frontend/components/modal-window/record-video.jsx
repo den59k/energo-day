@@ -73,6 +73,7 @@ function RecordModal ({onSubmit}){
 
 	return (
 		<div className={cn(styles.modal, styles.video, (mode === 'permission' || mode === 'not-accepted') && styles.permission)}>
+			<button onClick={modal.close} className={styles.closeButton}><img src="/images/icons/close.svg" alt="Закрыть окно"/></button>
 			{mode === 'saving' && <div className={styles.loader}><img src="/images/loader.png" alt="Загрузка..."/></div>}
 			{mode === 'permission' && (<div>Разрешите доступ к камере и к микрофону</div>)}
 			{mode === 'not-accepted' && (<div>В вашем браузере произошла ошибка.<br/>Воспользуйтесь другим браузером</div>)}
