@@ -35,7 +35,7 @@ export default function GameBlock (){
 		{ 
 			title: "Найди пару", 
 			sub: "Найдите одинаковые пары фотографий", 
-			component: <Pair onWin={onWin} className={cn(styles.game)}/>
+			component: <Pair onWin={onWin} className={cn(styles.game, styles.pair)}/>
 		}
 	]
 	

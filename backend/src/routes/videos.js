@@ -56,19 +56,10 @@ async function transcodeVideo (collection, _id){
 
 	const transcoded = '/db/videos/'+path.parse(video.src).name+'-converted.mp4'
 
-	let newSeconds = 0
-
 	ffmpeg(base(video.src))
 	.outputOptions('-qscale 16')
 	.save(base(transcoded))
-	.on('progress', function(progress){
-		const seconds = Math.floor(progress.frames/30)
-		
-		if(seconds > newSeconds+5){
-			newSeconds = seconds
-			collection.updateOne({_id: new ObjectID(_id)}, {$set: { seconds }})
-		}
-	}).on('end', function(){
+	.on('end', function(){
 		collection.updateOne({_id: new ObjectID(_id)}, { $set: { transcoding: false, transcoded }, $unset: { seconds: "" } })
 	})
 	await collection.updateOne({_id: new ObjectID(_id)}, {$set: { transcoding: true, seconds: 0 }})

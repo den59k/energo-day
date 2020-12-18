@@ -110,6 +110,12 @@ function isWin (poses){
 	return true
 }
 
+function sign (delta){
+	if(delta < 0) return -1
+	if(delta > 0) return 1
+	return 0
+}
+
 //Игра - пятнашки
 export default function Barley ({src, className, onWin}){
 
@@ -131,7 +137,7 @@ export default function Barley ({src, className, onWin}){
 	}, [poses, started])
 
 	const onMouseDown = (_e, index) => {
-
+		
 		const _pos = getPos(_e);
 	
 		const move = (e) => {
@@ -141,13 +147,14 @@ export default function Barley ({src, className, onWin}){
 			const delta = pos.map((i, _i) => i-_pos[_i]);
 
 			if(Math.abs(delta[0]) > 20){
-				setPoses(state => moveElementX(state, index, Math.sign(delta[0])));
+				setPoses(state => moveElementX(state, index, sign(delta[0])));
+				
 				document.removeEventListener('mousemove', move)
 				document.removeEventListener('touchmove', move)
 			}
 
 			if(Math.abs(delta[1]) > 20){
-				setPoses(state => moveElementY(state, index, Math.sign(delta[1])));
+				setPoses(state => moveElementY(state, index, sign(delta[1])));
 				document.removeEventListener('mousemove', move)
 				document.removeEventListener('touchmove', move)
 			}
