@@ -11,8 +11,8 @@ export default function Video ({time, description, title, className, style, id, 
 		console.log(window.location)
 		if(url && window.location.host === 'work.energo-day.ru')
 			openVideoModal(url)
-		else
-			openYoutubeModal(id, type)
+		//else
+			//openYoutubeModal(id, type)
 	}
 
 	return (
