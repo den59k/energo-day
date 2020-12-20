@@ -9,12 +9,14 @@ const videos = [
 	{ 
 		time: "Повтор будет доступен к просмотру с 12.00", 
 		description: "Поздравление\nГенерального Директора ПАО «Пермэнергосбыт»\nИгоря Валерьевича Шершакова",
-		id: "cPJ4KwS9YHc" 
+		id: "cPJ4KwS9YHc",
+		url: "http://172.16.1.39/1-gen-director.mp4"
 	},
 	{ 
 		time: "Повтор будет доступен к просмотру с 12.00", 
 		description: "Поздравление\nколлектива «Пермэнергосбыт» с Днем Энергетика\nот ТОП менеджеров компании",
-		id: "gqhJ-RiqbAQ" 
+		id: "gqhJ-RiqbAQ",
+		url: "http://172.16.1.39/2-top-managers.mp4"
 	}
 ]
 
@@ -25,7 +27,7 @@ export default function VideoBlock1 (){
 			<h2>Праздничные поздравления</h2>
 			<div className={styles.videos}>
 				{videos.map((item, index) => (
-					<Video key={index} url="http://172.16.0.68/01-severnoe.mp4" className="border"/>
+					<Video key={index} {...item} className="border"/>
 				))}
 			</div>
 			<Parallax src="/images/confetti-1.png" k={1}/>

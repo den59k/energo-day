@@ -8,7 +8,8 @@ export default function Video ({time, description, title, className, style, id, 
 	const _title = title || "С днём энергетика!"
 
 	const openVideo = () => {				//Потом здесь заморочим валидацию
-		if(url)
+		console.log(window.location)
+		if(url && window.location.host === 'work.energo-day.ru')
 			openVideoModal(url)
 		else
 			openYoutubeModal(id, type)

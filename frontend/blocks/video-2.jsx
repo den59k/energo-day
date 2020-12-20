@@ -5,7 +5,11 @@ import styles from './styles/video.module.sass'
 import Video from 'components/video'
 
 const videos = [
-	{ time: "Повтор будет доступен к просмотру с 12.00", id: "ZkpBLFU6sBE"  },
+	{ 
+		time: "Повтор будет доступен к просмотру с 12.00", 
+		id: "ZkpBLFU6sBE" ,
+		url: "http://172.16.1.39/3-nagrazhdenie.mp4"
+	},
 ]
 
 export default function VideoBlock1 (){
