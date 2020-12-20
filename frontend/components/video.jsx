@@ -1,14 +1,17 @@
 import cn from 'classnames'
-import { openYoutubeModal } from 'components/modal-window'
+import { openYoutubeModal, openVideoModal } from 'components/modal-window'
 
 import styles from './video.module.sass'
 
-export default function Video ({time, description, title, className, style, id, type}) {
+export default function Video ({time, description, title, className, style, id, type, url}) {
 
 	const _title = title || "С днём энергетика!"
 
 	const openVideo = () => {				//Потом здесь заморочим валидацию
-		openYoutubeModal(id, type)
+		if(url)
+			openVideoModal(url)
+		else
+			openYoutubeModal(id, type)
 	}
 
 	return (

@@ -25,7 +25,7 @@ export default function VideoBlock1 (){
 			<h2>Праздничные поздравления</h2>
 			<div className={styles.videos}>
 				{videos.map((item, index) => (
-					<Video key={index} {...item} className="border"/>
+					<Video key={index} url="http://172.16.0.68/01-severnoe.mp4" className="border"/>
 				))}
 			</div>
 			<Parallax src="/images/confetti-1.png" k={1}/>
