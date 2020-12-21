@@ -8,7 +8,8 @@ const videos = [
 	{ 
 		time: "Повтор будет доступен к просмотру с 12.00", 
 		id: "ZkpBLFU6sBE" ,
-		url: "http://172.16.1.39/3-nagrazhdenie.mp4"
+		url: "https://pesk2020.permenergosbyt.ru/3nagrazhdenie.mp4",
+		//url: "http://172.16.1.39/3-nagrazhdenie.mp4"
 	},
 ]
 

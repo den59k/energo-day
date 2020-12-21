@@ -5,18 +5,21 @@ import { Parallax } from 'components/parallax'
 import styles from './styles/video.module.sass'
 import Video from 'components/video'
 
+
 const videos = [
 	{ 
 		time: "Повтор будет доступен к просмотру с 12.00", 
 		description: "Поздравление\nГенерального Директора ПАО «Пермэнергосбыт»\nИгоря Валерьевича Шершакова",
 		id: "cPJ4KwS9YHc",
-		url: "http://172.16.1.39/1-gen-director.mp4"
+		url: "https://pesk2020.permenergosbyt.ru/1gendirector.mp4"
+		//url: "http://172.16.1.39/1-gen-director.mp4"
 	},
 	{ 
 		time: "Повтор будет доступен к просмотру с 12.00", 
 		description: "Поздравление\nколлектива «Пермэнергосбыт» с Днем Энергетика\nот ТОП менеджеров компании",
 		id: "gqhJ-RiqbAQ",
-		url: "http://172.16.1.39/2-top-managers.mp4"
+		url: "https://pesk2020.permenergosbyt.ru/2topmanagers.mp4"
+		//url: "http://172.16.1.39/2-top-managers.mp4"
 	}
 ]
 
