@@ -15,13 +15,16 @@ const links = [
 	{ title: "Праздничное фото", href: "/#make-photo" },
 ]
 
-const videoInfo = { 
-	time: "Праздничная трансляция начнется в 10:00",
-	id: "HOz34_2Z-mw" 
-}
 
 
-export default function HeadBlock(){
+
+export default function HeadBlock({timing}){
+
+	const videoInfo = { 
+		time: "Праздничная трансляция начнется в "+timing.time,
+		id: "HOz34_2Z-mw" ,
+		active: timing.active
+	}
 
 	return (
 		<header className={styles.container} id="head">

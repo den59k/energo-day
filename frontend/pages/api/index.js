@@ -1,26 +1,37 @@
 import getDB from 'libs/db'
+import { nanoid } from 'nanoid'
 
 export default async (req, res) => {
 
 	if(req.method === 'GET'){
 		const db = await getDB()
 		
-		const token = req.cookies.token
+		let token = req.cookies.token
 
 		const options = { projection: {_id: 0} }
 
 		const photos = await db.collection('photos').find({accepted: true}, options).toArray()
-		const videos = await db.collection('videos').find({accepted: true}, options).toArray()
 		const messages = await db.collection('chat').find({accepted: true}, options).toArray()
-
+		const videos = await db.collection('videos').find({accepted: true}, options).toArray()
 		const likes = await db.collection('votes').find({}, {...options, sort: { index: 1 }}).toArray()
 
-		let indexes
-		if(token)
-			indexes = await db.collection('likes').find({ip: token}, { projection: { _id: 0, ip: 0 }}).toArray()
-		else
-			indexes = []
+		if(!token){
+			token = nanoid(30)
+			res.setHeader("Set-Cookie", `token=${token};max-age=31536000; path=/;`)
+		}
 
-		res.json({photos, videos, messages, likes, indexes})
+		let indexes
+		indexes = await db.collection('likes').find({ip: token}, { projection: { _id: 0, ip: 0 }}).toArray()
+
+		await db.collection('online').updateOne({token}, {$set: { time: Date.now() } }, { upsert: true })
+
+		const timing = await db.collection('options').findOne({key: 'timing'}, { projection: { _id: 0, key: 0 } } )
+		
+		const _timing = {} 
+		
+		if(timing)
+			Object.keys(timing).forEach(key => _timing[key] = Date.now() > timing[key])
+
+		res.json({videos, photos, messages, likes, indexes, timing, _timing})
 	}
 }

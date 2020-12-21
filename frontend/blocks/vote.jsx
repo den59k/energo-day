@@ -103,11 +103,16 @@ const clips = [
 	},
 ]
 
-const time = "Голосование продлится с 12.00 до 16.00"
 
-export default function Vote({likes, indexes}){
+
+export default function Vote({likes, indexes, startVote, finishVote}){
+
+	let time = `Голосование продлится с ${startVote.time} до ${finishVote.time}`
+	if(finishVote.active)
+		time = 'Голосование закончилось в '+finishVote.time
 
 	const onLike = async (index) => {
+		if(!startVote.active || finishVote.active) return 
 		const resp = await REST ('/api/likes', {index}, indexes.find(item => item.index===index)?'DELETE': 'POST')
 		if(!resp.error) mutate('/api')
 	}
@@ -118,7 +123,7 @@ export default function Vote({likes, indexes}){
 			<ul className={cn(styles.votes, "container")}>
 				{clips.map((item, index) => (
 					<li key={index}>
-						<Video {...item} className={videoStyles.small} time={time} />
+						<Video {...item} className={videoStyles.small} time={time} active={startVote.active} flag={true}/>
 						<div className={styles.description}>{item._description}</div>
 						{indexes.find(item => item.index===index)?(
 							<button className={cn("button", styles.button)} onClick={() => onLike(index)}>

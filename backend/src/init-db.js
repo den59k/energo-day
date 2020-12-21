@@ -6,9 +6,11 @@ const indexes = {
 		login: { unique: true },
 		token: { unique: true }
 	},
-	services: {
-		url: { unique: true },
-		'projects.url': { unique: true }
+	online: {
+		token: { unique: true }
+	},
+	likes: {
+		ip: {}
 	}
 }
 

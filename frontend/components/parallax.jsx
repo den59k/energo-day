@@ -1,7 +1,6 @@
 import { useContext, createContext, useEffect, useState, useRef } from 'react';
 import cn from 'classnames'
 import { modal } from 'components/modal-window'
-import { last } from 'lodash';
 
 const ParallaxContext = createContext(0);
 

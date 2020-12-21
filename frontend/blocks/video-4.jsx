@@ -6,20 +6,23 @@ import videoStyles from 'components/video.module.sass'
 
 import Video from 'components/video'
 
-const videos = [
-	{ 
-		title: "Победители\nпо мнению жюри",
-		time: "Результаты доступны в 12.00",
-		id: "HOz34_2Z-mw"
-	},
-	{ 
-		title: "Приз зрительских симпатий",
-		time: "Результаты доступны в 16.45",
-		id: "HOz34_2Z-mw"
-	}
-]
 
-export default function VideoBlock4 (){
+export default function VideoBlock4 ({timing1, timing2}){
+		
+	const videos = [
+		{ 
+			title: "Победители\nпо мнению жюри",
+			time: "Результаты доступны в "+timing1.time,
+			active: timing1.active,
+			id: "HOz34_2Z-mw"
+		},
+		{ 
+			title: "Приз зрительских симпатий",
+			time: "Результаты доступны в "+timing2.time,
+			active: timing2.active,
+			id: "HOz34_2Z-mw"
+		}
+	]
 
 	return (
 		<div className={cn("h", styles.gradient, "flex-center")} id="video-4">

@@ -1,11 +1,11 @@
 import React from 'react'
-//import useSWR from 'swr'
-//import { GET, POST } from 'libs/fetch'
+import useSWR from 'swr'
+import { GET } from 'libs/fetch'
 import Layout from 'components/layout'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { IoIosHome, IoIosChatbubbles, IoIosCamera, IoIosVideocam } from 'react-icons/io'
 
-
+import AuthPage from 'pages/auth-page'
 import MainPage from 'pages/main-page'
 import ChatPage from 'pages/chat-page'
 import PhotoPage from 'pages/photo-page'
@@ -21,7 +21,11 @@ const menu = [
 
 export default function App() {
 	
-	//const { data } = useSWR('/api', GET)
+	const { data } = useSWR('/api', GET)
+
+	if(!data) return <div></div>
+
+	if(data.error) return <AuthPage/>
 
 	return (
 		<Router>

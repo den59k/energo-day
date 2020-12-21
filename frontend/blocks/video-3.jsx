@@ -4,16 +4,17 @@ import { Parallax } from 'components/parallax'
 import styles from './styles/video.module.sass'
 import Video from 'components/video'
 
-const videos = [
-	{ 
-		title: "Трансляция розыгрыша", 
-		time: "Результаты доступны в 12.00",
-		id: "HOz34_2Z-mw" 
-	}
-]
 
-export default function VideoBlock3 (){
-
+export default function VideoBlock3 ({timing}){
+	const videos = [
+		{ 
+			title: "Трансляция розыгрыша", 
+			time: "Результаты доступны в "+timing.time,
+			id: "HOz34_2Z-mw",
+			active: timing.active
+		}
+	]
+	
 	return (
 		<div className={cn("h", styles.gradient, "flex-center")} id="video-3">
 			<Parallax src="/images/salut-3.jpg" k={-0.3} className="cover"/>
