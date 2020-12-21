@@ -14,7 +14,7 @@ export default function VideoBlock4 ({timing1, timing2}){
 			title: "Победители\nпо мнению жюри",
 			time: "Результаты доступны в "+timing1.time,
 			active: timing1.active,
-			id: "HOz34_2Z-mw"
+			id: "zvOR5BiCZ3s"
 		},
 		{ 
 			title: "Приз зрительских симпатий",

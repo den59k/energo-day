@@ -40,5 +40,6 @@ function YoutubeModal ({id, type}){
 }
 
 export function openYoutubeModal (id, type){
+	console.log(type)
 	modal.open(<YoutubeModal id={id} type={type}/>)
 }

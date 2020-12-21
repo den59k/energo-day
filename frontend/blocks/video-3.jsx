@@ -10,7 +10,8 @@ export default function VideoBlock3 ({timing}){
 		{ 
 			title: "Трансляция розыгрыша", 
 			time: "Результаты доступны в "+timing.time,
-			id: "HOz34_2Z-mw",
+			id: "p37HFuRWrpo",
+			url: "https://pesk2020.permenergosbyt.ru/rozygr.mp4",
 			active: timing.active
 		}
 	]

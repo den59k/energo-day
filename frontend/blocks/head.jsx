@@ -16,13 +16,13 @@ const links = [
 ]
 
 
-
-
 export default function HeadBlock({timing}){
 
 	const videoInfo = { 
 		time: "Праздничная трансляция начнется в "+timing.time,
-		id: "HOz34_2Z-mw" ,
+		id: "6kf6wdpbux" ,
+		url: "https://pesk2020.permenergosbyt.ru/final.mp4",
+		type: 'wistia',
 		active: timing.active
 	}
 
