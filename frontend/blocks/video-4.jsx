@@ -30,9 +30,14 @@ export default function VideoBlock4 ({timing1, timing2}){
 			<Parallax src="/images/salut-4.jpg" k={-0.2} className="cover"/>
 			<h2>Поздравляем наших победителей</h2>
 			<div className={styles.videos}>
-				{videos.map((item, index) => (
-					<Video key={index} {...item} className={cn("border", videoStyles.smallTitle)}/>
-				))}
+				
+				<Video {...videos[0]} className={cn("border", videoStyles.smallTitle)}>
+					{timing1.active && <a download="Таблица результатов" href="/images/table.xlsx" className={styles.title}>
+						Скачать таблицу результатов
+					</a>}
+				</Video>
+				<Video {...videos[1]} className={cn("border", videoStyles.smallTitle)}></Video>
+				
 			</div>
 		</div>
 	)

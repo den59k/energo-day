@@ -3,7 +3,7 @@ import { openYoutubeModal, openVideoModal } from 'components/modal-window'
 
 import styles from './video.module.sass'
 
-export default function Video ({flag, active, time, description, title, className, style, id, type, url}) {
+export default function Video ({flag, active, time, description, title, className, style, id, type, url, children}) {
 
 	const _title = title || "С днём энергетика!"
 
@@ -25,6 +25,7 @@ export default function Video ({flag, active, time, description, title, classNam
 			{description && (
 				<div className={styles.description}>{description}</div>
 			)}
+			{children}
 		</div>
 	)
 }
