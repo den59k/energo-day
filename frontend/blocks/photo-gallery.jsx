@@ -30,13 +30,20 @@ export default function PhotoGallery ({photos}){
 
 	const [ currentPhoto, setCurrentPhoto ] = useState(0)
 	const [ mobileBigPhoto, setMobileBigPhoto ] = useState(false)
-	const [ count, setCount ] = useState()
+	const [ count, setCount ] = useState(15)
+	const [ page, setPage ] = useState(0)
 
 	const onMakePhoto = () => {
 		openMakePhotoModal(async (buffer) => {
 			const json = await fetch('/api/photos/upload', { method: 'POST', body: buffer })
 			const response = await json.json()
 			mutate('/api')
+
+			if(photos.length >= count*2)
+				setPage(Math.floor((photos.length)/count/2)*2)
+
+			setCurrentPhoto(photos.length)
+
 			closeModal()
 		})
 	}	
@@ -67,12 +74,19 @@ export default function PhotoGallery ({photos}){
 		setCurrentPhoto(index)
 	}
 
+	const slide = (inc) => {
+		const newPage = page + inc
+		if(newPage < 0 || newPage*count >= photos.length) return
+
+		setPage(newPage)
+	}
+
 	return (
 		<div className={cn("h flex-center", styles.container)} id="make-photo">
 			
 			<h2>Праздничная фотогалерея</h2>
 			<div className={cn(styles.photoContainer, "container")}>
-				<div className={cn(styles.photos, styles.left)}>{getPhotos(photos, 0, count, onPhotoClick)}</div>
+				<div className={cn(styles.photos, styles.left)}>{getPhotos(photos, page*count, (page+1)*count, onPhotoClick)}</div>
 
 				<div 
 					className={cn(styles.bigImage, mobileBigPhoto && styles.open)} 
@@ -81,10 +95,12 @@ export default function PhotoGallery ({photos}){
 					<button className={styles.close} onClick={() => setMobileBigPhoto(false)}></button>
 				</div>
 
-				<div className={cn(styles.photos, styles.right)}>{getPhotos(photos, count, count*2, onPhotoClick)}</div>
+				<div className={cn(styles.photos, styles.right)}>{getPhotos(photos, (page+1)*count, (page+2)*count, onPhotoClick)}</div>
 			</div>
 			<div className={styles.button}>
+				<button className={cn(styles.leftButton, page === 0 && styles.hide)} onClick={() => slide(-2)}></button>
 				<button className="button" onClick={onMakePhoto}>Сделать праздничное фото</button>
+				<button className={cn(styles.rightButton, count*(page+2) >= photos.length && styles.hide)} onClick={() => slide(2)}></button>
 			</div>
 			<Parallax src="/images/salut-3.jpg" k={-0.3} className="cover z-1"/>
 		</div>

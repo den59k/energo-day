@@ -5,11 +5,22 @@ import { useEffect, useState } from 'react'
 
 import styles from './styles/video-greetings.module.sass'
 
+function getVideos(videos, start, count){
+
+	const arr = []
+	for(let i = start; i < start+count; i++)
+		if(videos[i])
+			arr.push(videos[i])
+		else
+			arr.push({})
+	
+	return arr
+}
 
 export default function VideoGreetingsBlock ({videos}){
 	
 	const [ count, setCount ] = useState(15)
-	const newVideos = [ ...videos]
+	const [ page, setPage ] = useState(0)
 
 	useEffect(() => {
 		const resize = () => {
@@ -24,9 +35,6 @@ export default function VideoGreetingsBlock ({videos}){
 		return () => window.removeEventListener('resize', resize)
 	}, [])
 
-	for(let i = 0; i < count-videos.length; i++)
-		newVideos.push({})
-
 	const onClickRecord = () => {
 		openRecordModal(async (blob) => {
 			const json = await fetch('/api/videos/upload', {
@@ -35,19 +43,31 @@ export default function VideoGreetingsBlock ({videos}){
 			})
 			const resp = await json.json()
 			mutate('/api')
+			if(videos.length >= count)
+				setPage(Math.floor((videos.length+1)/count))
 			closeModal()
 		})
 	}
 
 	const onClickItem = (src) => {
-		openVideoModal(src)
+		if(src)
+			openVideoModal(src)
+	}
+
+	const slide = (inc) => {
+		const newPage = page + inc
+		if(newPage < 0 || newPage*count >= videos.length) return
+
+		setPage(newPage)
 	}
 
 	return (
 		<div className={cn("h flex-center", styles.container)} id="greetings">
 			<h2>Галерея видеопоздравлений от коллег</h2>
 			<div className={cn(styles.videoContainer, "container")}>
-				{newVideos.map((item, index) => <Video key={index} {...item} onClickItem={onClickItem}/>)}
+				{getVideos(videos, page*count, count).map((item, index) => <Video key={index} {...item} onClickItem={onClickItem}/>)}
+				<button className={cn(styles.arrowLeft, page === 0 && styles.hide)} onClick={() => slide(-1)}></button>
+				<button className={cn(styles.arrowRight, count*(page+1) >= videos.length && styles.hide)} onClick={() => slide(1)}></button>
 			</div>
 			<div className={styles.button}>
 				<button className="button" onClick={onClickRecord}>Записать видеопоздравление</button>
