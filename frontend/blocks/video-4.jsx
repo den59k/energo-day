@@ -14,7 +14,8 @@ export default function VideoBlock4 ({timing1, timing2}){
 			title: "Победители\nпо мнению жюри",
 			time: "Результаты доступны в "+timing1.time,
 			active: timing1.active,
-			id: "zvOR5BiCZ3s"
+			id: "zvOR5BiCZ3s",
+			url: "https://pesk2020.permenergosbyt.ru/pobediteli.mp4"
 		},
 		{ 
 			title: "Приз зрительских симпатий",
