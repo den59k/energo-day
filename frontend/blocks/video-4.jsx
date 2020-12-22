@@ -19,9 +19,9 @@ export default function VideoBlock4 ({timing1, timing2}){
 		},
 		{ 
 			title: "Приз зрительских симпатий",
-			time: "Результаты доступны в "+timing2.time,
-			active: timing2.active,
-			id: "HOz34_2Z-mw"
+			active: true,
+			id: "nNRPNc64e80",
+			flag: true
 		}
 	]
 
@@ -36,7 +36,14 @@ export default function VideoBlock4 ({timing1, timing2}){
 						Скачать таблицу результатов
 					</a>}
 				</Video>
-				<Video {...videos[1]} className={cn("border", videoStyles.smallTitle)}></Video>
+				<Video {...videos[1]} className={cn("border", videoStyles.smallTitle)}>
+					<div className={styles.title} style={{color: "white", textDecoration: "none"}}>{
+					`В связи с фиксацией разработчиками 
+					сайта недобросовестной накрутки лайков, 
+					результаты голосования будут аннулированы. 
+					Победитель будет объявлен после проведения детального расследования.`
+					}</div>
+				</Video>
 				
 			</div>
 		</div>
