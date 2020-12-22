@@ -19,12 +19,15 @@ export default async (req, res) => {
 		res.setHeader("Set-Cookie", `token=${token};max-age=31536000; path=/;`)
 	}
 	
+	return res.json({error: 'error'})
+
 	try{
 		if(req.method === 'POST'){
 			if(!validate(req, res, schema)) return
 
-			await db.insertOne({ip: token, index: req.body.index})
-			await voteDB.updateOne({index: req.body.index}, { $inc: { likes: 1 }})
+			const resp = await db.insertOne({ip: token, index: req.body.index})
+			if(resp.insertedCount > 0)
+				await voteDB.updateOne({index: req.body.index}, { $inc: { likes: 1 }})
 			res.json({count: 1})
 		}
 
