@@ -32,7 +32,8 @@ export default async (req, res) => {
 			if(!validate(req, res, schema)) return
 
 			const resp = await db.deleteOne({ip: token, index: req.body.index})
-			await voteDB.updateOne({index: req.body.index}, { $inc: { likes: -1 }})
+			if(resp.deletedCount > 0)
+				await voteDB.updateOne({index: req.body.index}, { $inc: { likes: -1 }})
 
 			res.json({count: resp.deletedCount})
 		}
